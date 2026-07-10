@@ -54,7 +54,7 @@
         <div class="container">
             <a class="navbar-brand text-gradient-gold" href="#home">Abideen.dev</a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <i class="bi bi-list text-light fs-2"></i>
+                <i class="bi bi-list text-light fs-4"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">

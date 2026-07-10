@@ -147,10 +147,24 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-custom {
     transition: $transition-slow;
     padding: 1.2rem 0;
+    overflow-x: hidden;
 
     &.scrolled {
         padding: 0.5rem 0;
         backdrop-filter: blur(12px);
+    }
+
+    .navbar-brand {
+        font-family: $font-family-heading;
+        font-weight: 800;
+        font-size: 1.5rem;
+        letter-spacing: -0.5px;
+        white-space: nowrap;
+    }
+
+    .navbar-toggler {
+        padding: 0.25rem 0.5rem;
+        flex-shrink: 0;
     }
 
     .nav-link {
@@ -858,8 +872,20 @@ h1, h2, h3, h4, h5, h6 {
 // ---- Mobile (≤767px) ----
 @media (max-width: 767.98px) {
     // Navbar brand
-    .navbar-custom .navbar-brand {
-        font-size: 1.25rem;
+    .navbar-custom {
+        padding: 0.5rem 0;
+
+        .navbar-brand {
+            font-size: 1.1rem;
+        }
+
+        .navbar-toggler {
+            padding: 0.2rem 0.4rem;
+
+            i {
+                font-size: 1.25rem;
+            }
+        }
     }
 
     // Hero section
