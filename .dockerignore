@@ -8,3 +8,5 @@ phpunit.xml
 .editorconfig
 .gitattributes
 database/database.sqlite
+tests
+.codely-cli
