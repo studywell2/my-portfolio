@@ -6,6 +6,7 @@ RUN apk add --no-cache \
     postgresql-dev \
     libpng-dev \
     libzip-dev \
+    oniguruma-dev \
     zip \
     unzip \
     nodejs \
