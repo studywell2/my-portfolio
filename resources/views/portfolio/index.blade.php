@@ -52,9 +52,9 @@
     {{-- Navbar --}}
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="main-navbar">
         <div class="container">
-            <a class="navbar-brand text-gradient-gold" href="#home">Abideen.dev</a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <i class="bi bi-list text-light fs-4"></i>
+            <a class="navbar-brand text-gradient-gold me-auto" href="#home">Abideen.dev</a>
+            <button class="navbar-toggler border-0 p-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <i class="bi bi-list text-light" style="font-size:1.4rem"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
