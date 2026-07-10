@@ -1,0 +1,59 @@
+// ===========================================
+// Abideen.dev — Custom SCSS Variables
+// ===========================================
+
+// Accent Colors
+$gold: #d4af37;
+$gold-light: #e8c547;
+$gold-dark: #b8941f;
+$blue: #3b82f6;
+$blue-light: #60a5fa;
+$blue-dark: #2563eb;
+
+// Dark Theme Colors
+$dark-bg: #0a0a0a;
+$dark-bg-alt: #121212;
+$dark-card: #1a1a1a;
+$dark-border: #2a2a2a;
+$dark-text: #e0e0e0;
+$dark-text-muted: #a0a0a0;
+
+// Light Theme Colors
+$light-bg: #f8f9fa;
+$light-bg-alt: #ffffff;
+$light-card: #ffffff;
+$light-border: #e0e0e0;
+$light-text: #1a1a1a;
+$light-text-muted: #6c757d;
+
+// Typography
+$font-family-base: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+$font-family-heading: 'Poppins', 'Inter', system-ui, sans-serif;
+$font-family-code: 'JetBrains Mono', 'Fira Code', monospace;
+
+// Shadows
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+$shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
+$shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.35);
+$shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.25);
+$shadow-blue: 0 4px 20px rgba(59, 130, 246, 0.25);
+
+// Transitions
+$transition-base: all 0.3s ease;
+$transition-slow: all 0.5s ease;
+$transition-fast: all 0.15s ease;
+
+// Border radius
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-pill: 50rem;
+
+// Bootstrap overrides
+$primary: $gold;
+$secondary: $blue;
+$body-bg-dark: $dark-bg;
+$body-color-dark: $dark-text;
+$border-radius: $radius-sm;
+$border-radius-sm: $radius-sm;
+$border-radius-lg: $radius-md;

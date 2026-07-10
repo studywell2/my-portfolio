@@ -1,0 +1,638 @@
+{
+  "tag": "auto-save-2026-07-09-15-02-49-624-general-purpose-wtznvc",
+  "timestamp": "2026-07-09T22:02:49.624Z",
+  "type": "automatic",
+  "clientHistory": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "This is the Codely CLI. We are setting up the context for our chat.\nToday's date is Thursday, July 9, 2026.\nMy operating system is: win32\nI'm currently working in the following directories:\n  - C:\\Users\\hp\\Desktop\\portt\n  - C:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\nHere is the folder structure of the current working directories:\n\nShowing up to 20 items (files + folders). Folders or files indicated with ... contain more items not shown, were ignored, or the display limit (20 items) was reached.\n\nC:\\Users\\hp\\Desktop\\portt\\\n├───.editorconfig\n├───.env.example\n├───.gitattributes\n├───.gitignore\n├───artisan\n├───composer.json\n├───composer.lock\n├───package-lock.json\n├───package.json\n├───phpunit.xml\n├───README.md\n├───vite.config.js\n├───.codely-cli\\\n├───app\\\n├───bootstrap\\\n├───config\\\n├───database\\\n├───node_modules\\...\n├───public\\\n├───resources\\\n└───...\nShowing up to 20 items (files + folders).\n\nC:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\\\n└───d9f4aae4-66dc-4763-bb69-35eebebe2a9a.md"
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "Got it. Thanks for the context!"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "Task MUST complete:\nCreate the following 6 Blade view files for admin category and skill management in a Laravel 12 project at C:\\Users\\hp\\Desktop\\portt. All admin views extend 'admin.layouts.app' and use Bootstrap 5 dark theme with gold accent (#d4af37). Form inputs use dark theme (bg: #121212, border-color: #2a2a2a, text: #e0e0e0). The layout provides @yield('title') and @yield('content') and handles session('success') alerts.\n\nCATEGORIES:\n\n1. `resources/views/admin/categories/index.blade.php`:\n- Title: \"Categories\"\n- Header with \"Categories\" and \"Add New Category\" button (route admin.categories.create)\n- Table: Name, Icon (show bi icon if exists), Projects Count, Sort Order, Actions (Edit/Delete)\n- Delete via form POST + @method('DELETE') + @csrf\n- Pagination links\n\n2. `resources/views/admin/categories/create.blade.php`:\n- Title: \"Add New Category\"\n- Form POST to admin.categories.store with @csrf\n- Fields: name (text), icon (text - Bootstrap icon class like \"bi-mortarboard\"), sort_order (number, default 0)\n- @error for each field\n- Submit \"Create Category\" (btn btn-gold), Cancel link back to index\n\n3. `resources/views/admin/categories/edit.blade.php`:\n- Title: \"Edit Category\"\n- Form PUT to admin.categories.update with @csrf @method('PUT')\n- Same fields pre-filled with old() and $category\n- Submit \"Update Category\" (btn btn-gold), Cancel link\n\nSKILLS:\n\n4. `resources/views/admin/skills/index.blade.php`:\n- Title: \"Skills\"\n- Header with \"Skills\" and \"Add New Skill\" button (route admin.skills.create)\n- Table: Name, Category (badge - color: backend=gold, frontend=blue, tools=gray), Proficiency (show percentage), Sort Order, Actions\n- Delete via form POST + @method('DELETE') + @csrf\n- Pagination links\n\n5. `resources/views/admin/skills/create.blade.php`:\n- Title: \"Add New Skill\"\n- Form POST to admin.skills.store with @csrf\n- Fields: name (text), category (select: backend/frontend/tools), proficiency (range 0-100 with value display), icon_class (text - Bootstrap icon class), sort_order (number, default 0)\n- @error for each field\n- Submit \"Create Skill\" (btn btn-gold), Cancel link\n\n6. `resources/views/admin/skills/edit.blade.php`:\n- Title: \"Edit Skill\"\n- Form PUT to admin.skills.update with @csrf @method('PUT')\n- Same fields pre-filled with old() and $skill\n- Submit \"Update Skill\" (btn btn-gold), Cancel link\n\nUse absolute paths for write_file:\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\categories\\index.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\categories\\create.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\categories\\edit.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\skills\\index.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\skills\\create.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\skills\\edit.blade.php\n\nWrite all 6 files now."
+        }
+      ]
+    }
+  ],
+  "description": "Subagent auto-save triggered by terminal status: completed_partial",
+  "prefixContext": {
+    "systemPrompt": {
+      "inheritance": "override",
+      "static": {
+        "kind": "override_inline_static",
+        "hash": "ae7d7b14696cc8bb9d35282e680b5fe5e5de2a67dc6ce15fa9f2ecbf10e9d6aa",
+        "text": "You are an agent for Codely CLI. Given the user's message, you should use the tools available to complete the task. Complete the task fully — don't gold-plate, but don't leave it half-done.\n\nWhen you complete the task, respond with a concise report covering what was done and any key findings — the caller will relay this to the user, so it only needs the essentials.\n\nYour strengths:\n- Searching for code, configurations, and patterns across large codebases\n- Analyzing multiple files to understand system architecture\n- Investigating complex questions that require exploring many files\n- Performing multi-step research tasks\n\nGuidelines:\n- For file searches: search broadly when you don't know where something lives. Use read_file when you know the specific file path.\n- For analysis: Start broad and narrow down. Use multiple search strategies if the first doesn't yield results.\n- Be thorough: Check multiple locations, consider different naming conventions, look for related files.\n- NEVER create files unless they're absolutely necessary for achieving your goal. ALWAYS prefer editing an existing file to creating a new one.\n- NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested.\n\n\n\n# Available Agent Skills\n\nYou have access to the following specialized skills. To activate a skill and receive its detailed instructions, you can call the `activate_skill` tool with the skill's name.\n\n<available_skills>\n  <skill>\n    <name>skill-creator</name>\n    <description>Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codely CLI's capabilities with specialized knowledge, workflows, or tool integrations.</description>\n    <location>C:\\Users\\hp\\AppData\\Local\\Temp\\codely-builtin-skills\\26d8953d4fa55d45\\skill-creator\\SKILL.md</location>\n  </skill>\n</available_skills>\n\n- **Skill Guidance:** Once a skill is activated via `activate_skill`, its instructions and resources are returned wrapped in `<activated_skill>` tags. You MUST treat the content within `<instructions>` as expert procedural guidance, prioritizing these specialized rules and workflows over your general defaults for the duration of the task. You may utilize any listed `<available_resources>` as needed. Follow this expert guidance strictly while continuing to uphold your core safety and security standards.\n\n\n# Environment Context\nI'm currently working in the following directories:\n  - C:\\Users\\hp\\Desktop\\portt\n  - C:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\nHere is the folder structure of the current working directories:\n\nShowing up to 20 items (files + folders). Folders or files indicated with ... contain more items not shown, were ignored, or the display limit (20 items) was reached.\n\nC:\\Users\\hp\\Desktop\\portt\\\n├───.editorconfig\n├───.env.example\n├───.gitattributes\n├───.gitignore\n├───artisan\n├───composer.json\n├───composer.lock\n├───package-lock.json\n├───package.json\n├───phpunit.xml\n├───README.md\n├───vite.config.js\n├───.codely-cli\\\n├───app\\\n├───bootstrap\\\n├───config\\\n├───database\\\n├───node_modules\\...\n├───public\\\n├───resources\\\n└───...\nShowing up to 20 items (files + folders).\n\nC:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\\\n└───d9f4aae4-66dc-4763-bb69-35eebebe2a9a.md\nImportant Rules:\n* You are running in a non-interactive mode. You CANNOT ask the user for input or clarification.\n* Work systematically using available tools to complete your task.\n* Always use absolute paths for file operations. Construct them using the provided \"Environment Context\".\n* When you have completed your task, you MUST call the `complete_task` tool.\n* Do not call any other tools in the same turn as `complete_task`.\n* This is the ONLY way to complete your mission. If you stop calling tools without calling this, you have failed."
+      },
+      "dynamic": {
+        "sections": [
+          {
+            "name": "memory",
+            "text": null,
+            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "additional_prompts",
+            "text": null,
+            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "joinedText": ""
+      }
+    },
+    "sessionSnapshot": {
+      "userMessageId": "d95640b4-962e-4750-8bd1-1b32be117868",
+      "assistantMessageId": "92519013-a63c-458b-8786-d6b740375f68",
+      "userContent": [
+        {
+          "text": "This is the Codely CLI. We are setting up the context for our chat.\nToday's date is Thursday, July 9, 2026.\nMy operating system is: win32\nI'm currently working in the following directories:\n  - C:\\Users\\hp\\Desktop\\portt\n  - C:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\nHere is the folder structure of the current working directories:\n\nShowing up to 20 items (files + folders). Folders or files indicated with ... contain more items not shown, were ignored, or the display limit (20 items) was reached.\n\nC:\\Users\\hp\\Desktop\\portt\\\n├───.editorconfig\n├───.env.example\n├───.gitattributes\n├───.gitignore\n├───artisan\n├───composer.json\n├───composer.lock\n├───package-lock.json\n├───package.json\n├───phpunit.xml\n├───README.md\n├───vite.config.js\n├───.codely-cli\\\n├───app\\\n├───bootstrap\\\n├───config\\\n├───database\\\n├───node_modules\\...\n├───public\\\n├───resources\\\n└───...\nShowing up to 20 items (files + folders).\n\nC:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\\\n└───d9f4aae4-66dc-4763-bb69-35eebebe2a9a.md"
+        }
+      ],
+      "assistantContent": "Got it. Thanks for the context!",
+      "includes": {
+        "environment": true,
+        "dynamicSystemPrompt": false,
+        "staticSystemPromptRef": false
+      }
+    },
+    "model": "codely-core"
+  },
+  "conversationRecord": {
+    "sessionId": "d9f4aae4-66dc-4763-bb69-35eebebe2a9a",
+    "projectHash": "29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca",
+    "startTime": "2026-07-09T21:57:39.574Z",
+    "lastUpdated": "2026-07-09T21:57:39.615Z",
+    "messages": [
+      {
+        "id": "d95640b4-962e-4750-8bd1-1b32be117868",
+        "timestamp": "2026-07-09T21:57:39.612Z",
+        "type": "user",
+        "content": [
+          {
+            "text": "This is the Codely CLI. We are setting up the context for our chat.\nToday's date is Thursday, July 9, 2026.\nMy operating system is: win32\nI'm currently working in the following directories:\n  - C:\\Users\\hp\\Desktop\\portt\n  - C:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\nHere is the folder structure of the current working directories:\n\nShowing up to 20 items (files + folders). Folders or files indicated with ... contain more items not shown, were ignored, or the display limit (20 items) was reached.\n\nC:\\Users\\hp\\Desktop\\portt\\\n├───.editorconfig\n├───.env.example\n├───.gitattributes\n├───.gitignore\n├───artisan\n├───composer.json\n├───composer.lock\n├───package-lock.json\n├───package.json\n├───phpunit.xml\n├───README.md\n├───vite.config.js\n├───.codely-cli\\\n├───app\\\n├───bootstrap\\\n├───config\\\n├───database\\\n├───node_modules\\...\n├───public\\\n├───resources\\\n└───...\nShowing up to 20 items (files + folders).\n\nC:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\\\n└───d9f4aae4-66dc-4763-bb69-35eebebe2a9a.md"
+          }
+        ],
+        "attachmentMeta": {
+          "type": "session_snapshot",
+          "isMeta": true,
+          "snapshotRole": "startup_qa",
+          "snapshotVersion": 1,
+          "includes": {
+            "environment": true,
+            "dynamicSystemPrompt": false,
+            "staticSystemPromptRef": false
+          }
+        },
+        "committed": true
+      },
+      {
+        "id": "92519013-a63c-458b-8786-d6b740375f68",
+        "timestamp": "2026-07-09T21:57:39.613Z",
+        "type": "gemini",
+        "content": "Got it. Thanks for the context!",
+        "committed": true,
+        "thoughts": [],
+        "tokens": null,
+        "model": "codely-core",
+        "attachmentMeta": {
+          "type": "session_snapshot",
+          "isMeta": true,
+          "snapshotRole": "startup_qa_ack",
+          "snapshotVersion": 1
+        }
+      },
+      {
+        "id": "2be65635-8d63-44d8-a647-4134f69a0baf",
+        "timestamp": "2026-07-09T21:57:39.615Z",
+        "type": "user",
+        "content": "Task MUST complete:\nCreate the following 6 Blade view files for admin category and skill management in a Laravel 12 project at C:\\Users\\hp\\Desktop\\portt. All admin views extend 'admin.layouts.app' and use Bootstrap 5 dark theme with gold accent (#d4af37). Form inputs use dark theme (bg: #121212, border-color: #2a2a2a, text: #e0e0e0). The layout provides @yield('title') and @yield('content') and handles session('success') alerts.\n\nCATEGORIES:\n\n1. `resources/views/admin/categories/index.blade.php`:\n- Title: \"Categories\"\n- Header with \"Categories\" and \"Add New Category\" button (route admin.categories.create)\n- Table: Name, Icon (show bi icon if exists), Projects Count, Sort Order, Actions (Edit/Delete)\n- Delete via form POST + @method('DELETE') + @csrf\n- Pagination links\n\n2. `resources/views/admin/categories/create.blade.php`:\n- Title: \"Add New Category\"\n- Form POST to admin.categories.store with @csrf\n- Fields: name (text), icon (text - Bootstrap icon class like \"bi-mortarboard\"), sort_order (number, default 0)\n- @error for each field\n- Submit \"Create Category\" (btn btn-gold), Cancel link back to index\n\n3. `resources/views/admin/categories/edit.blade.php`:\n- Title: \"Edit Category\"\n- Form PUT to admin.categories.update with @csrf @method('PUT')\n- Same fields pre-filled with old() and $category\n- Submit \"Update Category\" (btn btn-gold), Cancel link\n\nSKILLS:\n\n4. `resources/views/admin/skills/index.blade.php`:\n- Title: \"Skills\"\n- Header with \"Skills\" and \"Add New Skill\" button (route admin.skills.create)\n- Table: Name, Category (badge - color: backend=gold, frontend=blue, tools=gray), Proficiency (show percentage), Sort Order, Actions\n- Delete via form POST + @method('DELETE') + @csrf\n- Pagination links\n\n5. `resources/views/admin/skills/create.blade.php`:\n- Title: \"Add New Skill\"\n- Form POST to admin.skills.store with @csrf\n- Fields: name (text), category (select: backend/frontend/tools), proficiency (range 0-100 with value display), icon_class (text - Bootstrap icon class), sort_order (number, default 0)\n- @error for each field\n- Submit \"Create Skill\" (btn btn-gold), Cancel link\n\n6. `resources/views/admin/skills/edit.blade.php`:\n- Title: \"Edit Skill\"\n- Form PUT to admin.skills.update with @csrf @method('PUT')\n- Same fields pre-filled with old() and $skill\n- Submit \"Update Skill\" (btn btn-gold), Cancel link\n\nUse absolute paths for write_file:\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\categories\\index.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\categories\\create.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\categories\\edit.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\skills\\index.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\skills\\create.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\skills\\edit.blade.php\n\nWrite all 6 files now.",
+        "committed": true
+      }
+    ],
+    "fileHistorySnapshots": [],
+    "systemPromptRecord": {
+      "static": {
+        "kind": "core_static_ref",
+        "sectionName": "core_static",
+        "hash": "ae7d7b14696cc8bb9d35282e680b5fe5e5de2a67dc6ce15fa9f2ecbf10e9d6aa",
+        "placeholderText": "<core_static_ref hash=\"ae7d7b14696cc8bb9d35282e680b5fe5e5de2a67dc6ce15fa9f2ecbf10e9d6aa\" />"
+      },
+      "dynamic": {
+        "sections": [
+          {
+            "name": "memory",
+            "text": null,
+            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "additional_prompts",
+            "text": null,
+            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "joinedText": ""
+      }
+    }
+  },
+  "codelyVersion": "1.0.0-release.37",
+  "visibleTools": [
+    {
+      "functionDeclarations": [
+        {
+          "name": "activate_skill",
+          "description": "Activates a specialized agent skill by name. Returns the skill's instructions wrapped in `<activated_skill>` tags. These provide specialized guidance for the current task. Use this when you identify a task that matches a skill's description. ONLY use names exactly as they appear in the `<available_skills>` section or schema enum.",
+          "parametersJsonSchema": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "enum": [
+                  "skill-creator"
+                ],
+                "description": "The name of the skill to activate."
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false,
+            "$schema": "http://json-schema.org/draft-07/schema#"
+          }
+        },
+        {
+          "name": "analyze_multimedia",
+          "description": "Analyzes images, videos, and audio files using a multimodal model. This tool accepts local file paths, base64 data, or URLs to multimedia content. Supported formats include common image types (PNG, JPG, GIF, WEBP, BMP), video formats (MP4, MKV, OGG), and audio formats (MP3, WAV, FLAC, OGG, M4A).\n\nKey capabilities:\n• Visual Agent: Operates PC/mobile GUIs, recognizes UI elements, understands functions, can guide through interface interactions\n• Visual Coding: Generates Draw.io diagrams, HTML/CSS/JS code from images/videos\n• Text Extraction: Reads and extracts all text from images including documents, receipts, screenshots\n• Spatial Perception: Judges object positions, viewpoints, occlusions, provides 2D grounding\n• Content Analysis: Describes scenes, identifies objects, analyzes actions in videos\n• Audio Understanding: Transcribes speech, identifies sounds, analyzes audio content\n• Technical Understanding: Interprets charts, diagrams, technical drawings, code screenshots\n\nThe model responds based on your specific prompt. Examples: 'Extract all text from this receipt', 'Generate HTML code for this UI design', 'Identify all clickable elements in this screenshot', 'Describe the spatial relationships between objects', 'Transcribe the speech in this audio', 'What sounds are in this recording?'.",
+          "parametersJsonSchema": {
+            "properties": {
+              "type": {
+                "description": "The type of multimedia input",
+                "type": "string",
+                "enum": [
+                  "absolute_path",
+                  "base64",
+                  "url"
+                ]
+              },
+              "content": {
+                "description": "The multimedia content. For 'absolute_path': provide the absolute file path. For 'base64': provide base64 data (with or without 'data:mime/type;base64,' prefix). For 'url': provide the complete URL starting with http:// or https://.",
+                "type": "string"
+              },
+              "prompt": {
+                "description": "The prompt or question to ask about the multimedia content. Be specific about what you want to know. Examples: 'Describe what you see in this image', 'Extract all text from this receipt', 'Generate HTML/CSS code for this UI design', 'Identify all clickable elements and their functions in this screenshot', 'What actions are happening in this video?', 'Create a Draw.io diagram based on this flowchart image', 'Describe the spatial relationships between objects', 'What UI components are visible and how can I interact with them?', 'Transcribe the speech in this audio file', 'What sounds can you hear in this recording?', 'Identify the speakers in this conversation'.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "content",
+              "prompt"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "name": "enter_plan_mode",
+          "description": "Request approval to proactively enter Plan Mode for non-trivial implementation work. Use it when the task needs structured planning before coding, but not for simple fixes or pure research. This requires user approval and is only available in interactive sessions.",
+          "parametersJsonSchema": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "glob",
+          "description": "Efficiently finds files matching specific glob patterns (e.g., `src/**/*.ts`, `**/*.md`), returning absolute paths sorted by modification time (newest first). Ideal for quickly locating files based on their name or path structure, especially in large codebases.",
+          "parametersJsonSchema": {
+            "properties": {
+              "pattern": {
+                "description": "The glob pattern to match against (e.g., '**/*.py', 'docs/*.md').",
+                "type": "string"
+              },
+              "path": {
+                "description": "Optional: The absolute path to the directory to search within. If omitted, searches the root directory.",
+                "type": "string"
+              },
+              "case_sensitive": {
+                "description": "Optional: Whether the search should be case-sensitive. Defaults to false.",
+                "type": "boolean"
+              },
+              "include_hidden": {
+                "description": "Optional: Whether to descend into dot-prefixed directories (e.g. '.git/', '.codely-cli/') and match dot-prefixed files. Defaults to false to mirror search content tools. Set to true to scan hidden paths explicitly.",
+                "type": "boolean"
+              },
+              "maxResults": {
+                "description": "Optional: Maximum number of file paths to return (default: 100). Use to limit output for broad patterns. When the cap is hit the result is paginated; pass 'offset' set to the previous offset+maxResults to continue.",
+                "type": "integer",
+                "minimum": 1
+              },
+              "offset": {
+                "description": "Optional: Number of matching file paths to skip before returning results. Use this to continue after a truncated result's next offset.",
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000
+              }
+            },
+            "required": [
+              "pattern"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "list_directory",
+          "description": "Lists the names of files and subdirectories directly within a specified directory path. Can optionally ignore entries matching provided glob patterns.",
+          "parametersJsonSchema": {
+            "properties": {
+              "path": {
+                "description": "The absolute path to the directory to list (must be absolute, not relative)",
+                "type": "string"
+              },
+              "ignore": {
+                "description": "List of glob patterns to ignore",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "lsp",
+          "description": "Interact with LSP servers for code intelligence: definition, references, hover, symbols, implementation, and call hierarchy.",
+          "parametersJsonSchema": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "type": "string",
+                "enum": [
+                  "goToDefinition",
+                  "findReferences",
+                  "hover",
+                  "documentSymbol",
+                  "workspaceSymbol",
+                  "goToImplementation",
+                  "prepareCallHierarchy",
+                  "incomingCalls",
+                  "outgoingCalls"
+                ]
+              },
+              "filePath": {
+                "type": "string",
+                "description": "Absolute or relative file path in workspace."
+              },
+              "line": {
+                "type": "number",
+                "description": "1-based line number for position-based operations."
+              },
+              "character": {
+                "type": "number",
+                "description": "1-based character offset for position-based operations."
+              },
+              "query": {
+                "type": "string",
+                "description": "Query string used by workspaceSymbol."
+              }
+            },
+            "required": [
+              "operation",
+              "filePath"
+            ]
+          }
+        },
+        {
+          "name": "read_file",
+          "description": "Reads and returns the content of a specified file. By default reads up to 2000 lines starting from the beginning of the file. Files whose selected range exceeds 256 KB are truncated with an advisory; use 'offset' and 'limit' only if the file is too large to read at once — it's recommended to read the whole file by not providing these parameters. Handles text files. For images, PDFs, videos, audio or other multimedia files, this tool cannot present their contents to the model — use the 'analyze_multimedia' tool instead.",
+          "parametersJsonSchema": {
+            "properties": {
+              "absolute_path": {
+                "description": "The absolute path to the file to read (e.g., '/home/user/project/file.txt'). Relative paths are not supported. You must provide an absolute path.",
+                "type": "string"
+              },
+              "offset": {
+                "description": "Optional: For text files, the 0-based line number to start reading from. Only provide if the file is too large to read at once. Note: search_file_content reports matches as 1-based `Lxx` line numbers; to jump from a hit at `L42` here, subtract 1 — pass `offset: 41` (i.e. `offset = lineNumber - 1`).",
+                "type": "integer"
+              },
+              "limit": {
+                "description": "Optional: For text files, the maximum number of lines to read. Only provide if the file is too large to read at once.",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "absolute_path"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "name": "replace",
+          "description": "Replaces text within a file. Use this tool for targeted edits to existing files.\n\nThe tool replaces exactly ONE occurrence of `old_string` with `new_string` by default. The `old_string` MUST uniquely identify the specific instance to change — unless `replace_all` is set to true, in which case every occurrence of `old_string` will be replaced. Use the read_file tool to establish the current file state before the first text replacement. If the tool reports that the file changed since it was read, re-read it before retrying.\n\nIf you need to replace the full contents of an existing file, use `write_file` instead.\nIf `old_string` is empty, the tool treats the operation as creating a new file. This is only valid when the target file does not already exist.\nDo not use an empty `old_string` to overwrite an existing file.\n\nThe user has the ability to modify the `new_string` content. If modified, this will be stated in the response.\n\nExpectation for required parameters:\n1. `file_path` MUST be an absolute path; otherwise an error will be thrown.\n2. Prefer exact literal text for `old_string`, including relevant surrounding context and matching whitespace, indentation, and newlines when possible.\n3. Prefer exact literal text for `new_string`, and ensure the resulting code is correct and idiomatic.\n4. NEVER escape `old_string` or `new_string`, that would break the exact literal text requirement.\n\n**Important:** Exact literal matches are the most reliable. The tool may also apply limited deterministic normalization for whitespace, indentation, and escaping, but do not rely on fallback matching when you can provide the exact text. The edit will FAIL if `old_string` is not unique in the file. Either provide a larger string with more surrounding context to make it unique or use `replace_all` to change every instance of `old_string`.\nUse `replace_all` for replacing and renaming strings across the file. This parameter is useful if you want to rename a variable for instance.",
+          "parametersJsonSchema": {
+            "properties": {
+              "file_path": {
+                "description": "The absolute path to the file to modify. Must start with '/'.",
+                "type": "string"
+              },
+              "old_string": {
+                "description": "Prefer exact literal text when possible, preferably unescaped. Include at least 3 lines of context BEFORE and AFTER the target text, matching whitespace and indentation as closely as you can. The `old_string` should uniquely match one location in the file unless `replace_all` is true. Exact matches are the most reliable, and the tool may also apply limited deterministic normalization for whitespace, indentation, and escaping when needed. If `old_string` is empty, the tool treats the operation as creating a new file. This is only valid when the target file does not already exist.",
+                "type": "string"
+              },
+              "new_string": {
+                "description": "Prefer exact literal text to replace `old_string` with, preferably unescaped. Provide the intended final text and ensure the resulting code is correct and idiomatic.",
+                "type": "string"
+              },
+              "replace_all": {
+                "description": "Replace all occurrences of old_string (default false). Use this for replacing and renaming strings across the file.",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "file_path",
+              "old_string",
+              "new_string"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "name": "run_shell_command",
+          "description": "This tool executes a given shell command using the best available Windows shell (PowerShell Core, Windows PowerShell, or Command Prompt).\n\nIMPORTANT:\n- This tool is for terminal operations (e.g., git / npm / docker / build & test commands).\n- DO NOT use this tool for file operations like reading, writing, editing, or searching files. Prefer the dedicated file tools for those actions.\n- Quote any file path that contains spaces with double quotes, e.g. `cd \"/path with spaces\"` or `python \"/path with spaces/script.py\"`.\n- If a command would produce very large output, prefer adding flags/filters (narrow paths, limit counts, request specific fields, machine-readable formats like JSON) to keep output small and unambiguous.\n- Very large outputs may be returned as the most recent tail of the output. Earlier content may be truncated from the beginning. If the tool reports a \"Full output saved to: <path>\", that file contains the full command output. Use the exact path returned by the tool, then prefer searching that file first (grep/rg or platform equivalents) for specific ERROR/WARN/FAIL/SUCCESS markers, then reading small slices (with `read_file` using `offset`/`limit`) or tailing the log file instead of re-running expensive commands.\n- Do not append truncating pipelines such as `| tail`, `| Select-Object -Last`, or similar to an expensive first run just to suppress output. Those discard earlier context and force a re-run if you later need omitted lines. Let the tool/log capture the full output, then inspect the saved log file.\n- When issuing multiple shell commands in one response, parallelize only when they are truly independent and do not compete for the same files, directories, logs, locks, caches, git state, or ports. If one command depends on another or shared state may race, run them sequentially.\n\nThe following information is returned:\n- Command: Executed command.\n- Directory: Directory where command was executed, or `(root)`.\n- Output: Combined command output (stdout/stderr). Can be `(empty)` or an excerpt if very large.\n- Error: Error or `(none)` if no error was reported for the subprocess.\n- Exit Code: Exit code or `(none)` if terminated by signal.\n- Signal: Signal number or `(none)` if no signal was received.",
+          "parametersJsonSchema": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string",
+                "description": "Exact command to execute using the best available Windows shell (automatically selected from PowerShell Core, Windows PowerShell, or Command Prompt). Quote any file paths containing spaces with double quotes."
+              },
+              "description": {
+                "type": "string",
+                "description": "Brief description of the command for the user. Be specific and concise. Ideally a single sentence. Can be up to 3 sentences for clarity. No line breaks."
+              },
+              "directory": {
+                "type": "string",
+                "description": "(OPTIONAL) The absolute path of the directory to run the command in. If not provided, the project root directory is used. Must be a directory within the workspace and must already exist."
+              }
+            },
+            "required": [
+              "command"
+            ]
+          }
+        },
+        {
+          "name": "search_file_content",
+          "description": "Searches for a regular expression pattern within the content of files in a specified directory, a specific file, or the current working directory. The search backend is ripgrep, so regex patterns use ripgrep/Rust regex syntax, not JavaScript RegExp syntax. If you need to search literal text that contains regex metacharacters (for example $, {, [, (, or \\), set fixed_strings: true or -F: true instead of escaping by hand. Can filter files by a glob pattern when searching directories. By default, returns matching lines with file paths and line numbers; set output_mode to \"files_with_matches\" for just file paths or \"count\" for per-file match totals. Each matched line is truncated at 500 characters with a \"[line truncated from N chars]\" suffix to keep minified or base64 content from blowing up context.",
+          "parametersJsonSchema": {
+            "properties": {
+              "pattern": {
+                "description": "The regular expression pattern to search for within file contents. This is interpreted by ripgrep/Rust regex, not JavaScript RegExp; avoid JS-only features such as lookbehind and backreferences. Regex syntax errors are returned by ripgrep. For literal text, especially strings containing regex metacharacters like $, {, [, (, or \\, prefer fixed_strings: true or -F: true. When passing JSON args, escape only for JSON once: to match literal ${, use pattern \"\\\\$\\\\{\" (the regex engine sees \\$\\{), not \"\\\\\\\\$\\\\\\\\{\".",
+                "type": "string"
+              },
+              "path": {
+                "description": "Optional: A path relative to the workspace root, or an absolute path to a directory or file to search within. If a file path is provided, searches only within that file. If a directory path is provided, searches all files in that directory. If omitted, searches the current working directory.",
+                "type": "string"
+              },
+              "glob": {
+                "description": "Optional: A glob pattern to filter which files are searched (e.g., '*.js', '*.{ts,tsx}', 'src/**'). Single string only — combine multiple patterns via whitespace/comma separation (e.g. '*.js *.ts', '*.js,*.ts') or brace expansion ('*.{ts,tsx}'). Only applicable when searching directories, ignored for file searches. If omitted, searches all files (respecting potential global ignores).",
+                "type": "string"
+              },
+              "output_mode": {
+                "description": "Optional: Output format. 'content' (default) returns matching lines with line numbers and optional context; 'files_with_matches' returns only the list of matching file paths; 'count' returns per-file match counts.",
+                "enum": [
+                  "content",
+                  "files_with_matches",
+                  "count"
+                ],
+                "type": "string"
+              },
+              "maxResults": {
+                "description": "Optional: Maximum number of matches to return to prevent context overflow (default: 250, max: 1000). Values above 1000 are clamped automatically. Use lower values for broad searches, higher for specific searches. Pass 0 for unlimited.",
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "head_limit": {
+                "description": "Optional: Claude Code aligned alias for 'maxResults'. When both are provided, head_limit wins. Pass 0 for unlimited (use sparingly — large result sets waste context).",
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "offset": {
+                "description": "Optional: Number of matches to skip before returning results. Use this to continue after a truncated result's next offset.",
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000
+              },
+              "-A": {
+                "description": "Optional: Number of context lines to show after each match. Only applies to 'content' output_mode. Alias for ripgrep's -A.",
+                "type": "integer",
+                "minimum": 0
+              },
+              "-B": {
+                "description": "Optional: Number of context lines to show before each match. Only applies to 'content' output_mode. Alias for ripgrep's -B.",
+                "type": "integer",
+                "minimum": 0
+              },
+              "-C": {
+                "description": "Optional: Number of context lines to show before and after each match. Only applies to 'content' output_mode. Alias for ripgrep's -C.",
+                "type": "integer",
+                "minimum": 0
+              },
+              "context": {
+                "description": "Optional: Number of context lines to show before and after each match. Only applies to 'content' output_mode. Alias for -C.",
+                "type": "integer",
+                "minimum": 0
+              },
+              "-n": {
+                "description": "Optional: Whether to include line numbers in 'content' output. Defaults to true; set to false to omit them.",
+                "type": "boolean"
+              },
+              "-i": {
+                "description": "Optional: Case-insensitive matching. Defaults to false (case-sensitive), matching ripgrep behavior.",
+                "type": "boolean"
+              },
+              "fixed_strings": {
+                "description": "Optional: Treat the pattern as a literal string instead of a regular expression. Alias for -F.",
+                "type": "boolean"
+              },
+              "-F": {
+                "description": "Optional: Treat the pattern as a literal string instead of a regular expression. Alias for fixed_strings.",
+                "type": "boolean"
+              },
+              "type": {
+                "description": "Optional: ripgrep file type filter (rg --type). Common types: js, py, rust, go, java, etc. Accepts any alias from `rg --type-list`; the value is forwarded verbatim to ripgrep.",
+                "type": "string"
+              },
+              "multiline": {
+                "description": "Optional: Enable multiline matching where patterns may span newlines (passes -U and --multiline-dotall to ripgrep). Only meaningful for 'content' output_mode. ^/$ anchors keep line boundaries behavior for portability across search backends.",
+                "type": "boolean"
+              },
+              "include_hidden": {
+                "description": "Optional: Whether to descend into dot-prefixed directories (e.g. '.git/', '.codely-cli/') and match dot-prefixed files. Defaults to false to mirror ripgrep's default hidden-skip behaviour. Set to true to scan hidden paths explicitly (passes --hidden to ripgrep).",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "pattern"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "web_fetch",
+          "description": "Fetches content from a specified URL and processes it using an AI model. Takes a URL and a prompt as input. Fetches the URL content, converts HTML to markdown, and returns the content for analysis.",
+          "parametersJsonSchema": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "description": "The URL to fetch content from. Must be a fully-formed valid URL starting with \"http://\" or \"https://\" (e.g., \"https://example.com\").",
+                "type": "string"
+              },
+              "prompt": {
+                "description": "The prompt describing what information to extract from the fetched content (e.g., \"Summarize this page\", \"Extract all API endpoints\").",
+                "type": "string"
+              }
+            },
+            "required": [
+              "url",
+              "prompt"
+            ]
+          }
+        },
+        {
+          "name": "web_search",
+          "description": "Searches the internet/web for information using a search query. Use this tool when you need to search for information online but do NOT have a specific URL. Returns search results with titles, snippets, and source URLs.\n\nWhen to use:\n- User asks to \"search the web\" or \"find information about X\"\n- You need current information, news, or documentation from the internet\n- You need to discover web pages related to a topic\n- You have a search query but no specific URL\n\nWhen NOT to use:\n- You already have a specific URL (use web_fetch instead)\n- User provides a direct URL to access\n\nExample: web_search(query=\"latest AI developments\")",
+          "parametersJsonSchema": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string",
+                "description": "The search query to find information on the web."
+              }
+            },
+            "required": [
+              "query"
+            ]
+          }
+        },
+        {
+          "name": "write_file",
+          "description": "Writes content to a specified file in the local filesystem.\n\n      Use this tool to create a new file or completely overwrite an existing file.\n      Prefer the `replace` tool for targeted edits to existing files.\n      Use `write_file` for new files or full-file rewrites.\n      Do not use `replace` with an empty `old_string` to overwrite an existing file.\n\n      The user has the ability to modify `content`. If modified, this will be stated in the response.",
+          "parametersJsonSchema": {
+            "properties": {
+              "file_path": {
+                "description": "The absolute path to the file to write to (e.g., '/home/user/project/file.txt'). Relative paths are not supported.",
+                "type": "string"
+              },
+              "content": {
+                "description": "The content to write to the file.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "file_path",
+              "content"
+            ],
+            "type": "object"
+          }
+        },
+        {
+          "name": "complete_task",
+          "description": "Call this tool to submit your final result and complete the task. This is the ONLY way to finish.\n\nThis tool must be called ALONE in its turn. Do not call any other tools in the same turn. If you still need another tool, do not call this yet.\n\nYour result MUST be an informative handoff for the caller (main agent), not a one-line summary.\n\nRequirements for result:\n- Use 2+ short paragraphs or a short markdown sectioned report\n- Include what you did / found and the concrete evidence that supports it\n- Include file paths, errors, command outcomes, or other artifacts when relevant\n- Do NOT return only a title or a single-line summary\n- Keep it concise, but detailed enough that the main agent can act without reopening your full trace\n- Choose a status that matches the outcome: use 'success' for fully completed work, 'partial' for meaningful progress with straightforward continuation, 'blocked' for external blockers that you cannot resolve autonomously, and 'failure' for invalid or unrecoverable paths\n\nGood result example:\n## Findings\nI inspected `packages/core/src/foo.ts` and `packages/cli/src/bar.ts`.\nThe bug is caused by `baz()` skipping null checks in the headless path.\n\n## Evidence\n- `packages/core/src/foo.ts:42` calls `baz(input!)`\n- `npm test -- foo` fails with `TypeError: ...`\n\n## Next steps\nUpdate the null guard in `foo.ts` and rerun the focused test.\n\nGood result example (partial completion due to budget):\n## Completed\n- Inspected `packages/core/src/foo.ts` and confirmed the bug location\n- Ran `npm test -- foo` to reproduce the failure\n\n## Findings\n- The root cause is a missing null guard in `baz()` at line 42\n- The fix requires updating both `foo.ts` and the corresponding test file\n\n## Remaining\n- Actual code fix not applied (budget exhausted before edit)\n- Test update for the new null guard path\n\n## Blockers\nBudget exhausted. The fix is straightforward — apply the null guard and rerun tests.\n\nBad result example:\n## Findings\nInvestigated the issue.",
+          "parametersJsonSchema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "description": "Final status for the caller (e.g. 'success', 'failure', 'partial', 'blocked').",
+                "minLength": 1
+              },
+              "result": {
+                "type": "string",
+                "description": "Provide a substantive handoff of what you did / found. Do not return only a title or single-line summary; include enough evidence and detail for the main agent to act on directly.",
+                "minLength": 24
+              },
+              "next_steps": {
+                "type": "string",
+                "description": "Actionable next steps, or 'none' if there are no follow-ups.",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "status",
+              "result",
+              "next_steps"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "history": [
+    {
+      "type": "user",
+      "text": "This is the Codely CLI. We are setting up the context for our chat.\nToday's date is Thursday, July 9, 2026.\nMy operating system is: win32\nI'm currently working in the following directories:\n  - C:\\Users\\hp\\Desktop\\portt\n  - C:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\nHere is the folder structure of the current working directories:\n\nShowing up to 20 items (files + folders). Folders or files indicated with ... contain more items not shown, were ignored, or the display limit (20 items) was reached.\n\nC:\\Users\\hp\\Desktop\\portt\\\n├───.editorconfig\n├───.env.example\n├───.gitattributes\n├───.gitignore\n├───artisan\n├───composer.json\n├───composer.lock\n├───package-lock.json\n├───package.json\n├───phpunit.xml\n├───README.md\n├───vite.config.js\n├───.codely-cli\\\n├───app\\\n├───bootstrap\\\n├───config\\\n├───database\\\n├───node_modules\\...\n├───public\\\n├───resources\\\n└───...\nShowing up to 20 items (files + folders).\n\nC:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\\\n└───d9f4aae4-66dc-4763-bb69-35eebebe2a9a.md"
+    },
+    {
+      "type": "gemini",
+      "text": "Got it. Thanks for the context!"
+    },
+    {
+      "type": "user",
+      "text": "Task MUST complete:\nCreate the following 6 Blade view files for admin category and skill management in a Laravel 12 project at C:\\Users\\hp\\Desktop\\portt. All admin views extend 'admin.layouts.app' and use Bootstrap 5 dark theme with gold accent (#d4af37). Form inputs use dark theme (bg: #121212, border-color: #2a2a2a, text: #e0e0e0). The layout provides @yield('title') and @yield('content') and handles session('success') alerts.\n\nCATEGORIES:\n\n1. `resources/views/admin/categories/index.blade.php`:\n- Title: \"Categories\"\n- Header with \"Categories\" and \"Add New Category\" button (route admin.categories.create)\n- Table: Name, Icon (show bi icon if exists), Projects Count, Sort Order, Actions (Edit/Delete)\n- Delete via form POST + @method('DELETE') + @csrf\n- Pagination links\n\n2. `resources/views/admin/categories/create.blade.php`:\n- Title: \"Add New Category\"\n- Form POST to admin.categories.store with @csrf\n- Fields: name (text), icon (text - Bootstrap icon class like \"bi-mortarboard\"), sort_order (number, default 0)\n- @error for each field\n- Submit \"Create Category\" (btn btn-gold), Cancel link back to index\n\n3. `resources/views/admin/categories/edit.blade.php`:\n- Title: \"Edit Category\"\n- Form PUT to admin.categories.update with @csrf @method('PUT')\n- Same fields pre-filled with old() and $category\n- Submit \"Update Category\" (btn btn-gold), Cancel link\n\nSKILLS:\n\n4. `resources/views/admin/skills/index.blade.php`:\n- Title: \"Skills\"\n- Header with \"Skills\" and \"Add New Skill\" button (route admin.skills.create)\n- Table: Name, Category (badge - color: backend=gold, frontend=blue, tools=gray), Proficiency (show percentage), Sort Order, Actions\n- Delete via form POST + @method('DELETE') + @csrf\n- Pagination links\n\n5. `resources/views/admin/skills/create.blade.php`:\n- Title: \"Add New Skill\"\n- Form POST to admin.skills.store with @csrf\n- Fields: name (text), category (select: backend/frontend/tools), proficiency (range 0-100 with value display), icon_class (text - Bootstrap icon class), sort_order (number, default 0)\n- @error for each field\n- Submit \"Create Skill\" (btn btn-gold), Cancel link\n\n6. `resources/views/admin/skills/edit.blade.php`:\n- Title: \"Edit Skill\"\n- Form PUT to admin.skills.update with @csrf @method('PUT')\n- Same fields pre-filled with old() and $skill\n- Submit \"Update Skill\" (btn btn-gold), Cancel link\n\nUse absolute paths for write_file:\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\categories\\index.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\categories\\create.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\categories\\edit.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\skills\\index.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\skills\\create.blade.php\n- C:\\Users\\hp\\Desktop\\portt\\resources\\views\\admin\\skills\\edit.blade.php\n\nWrite all 6 files now."
+    }
+  ],
+  "subagentMetadata": {
+    "mainSessionId": "d9f4aae4-66dc-4763-bb69-35eebebe2a9a",
+    "taskId": "task-42afd2dc-1877-4dba-a88d-83395a52d766",
+    "taskOutputJsonlPath": "C:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\tasks\\task-42afd2dc-1877-4dba-a88d-83395a52d766.jsonl",
+    "subagentName": "general-purpose",
+    "agentName": "general-purpose",
+    "agentId": "general-purpose-wtznvc",
+    "status": "completed_partial",
+    "resultSummary": "Streaming request timeout after 310s. Try reducing input length or increasing timeout in config.\n\nStreaming timeout troubleshooting:\n- Reduce input length or complexity\n- Increase timeout in config: contentGenerator.timeout\n- Check network stability for streaming connections\n- Consider using non-streaming mode for very long inputs",
+    "model": "codely-core",
+    "systemPrompt": {
+      "inheritance": "override",
+      "static": {
+        "kind": "override_inline_static",
+        "hash": "ae7d7b14696cc8bb9d35282e680b5fe5e5de2a67dc6ce15fa9f2ecbf10e9d6aa",
+        "text": "You are an agent for Codely CLI. Given the user's message, you should use the tools available to complete the task. Complete the task fully — don't gold-plate, but don't leave it half-done.\n\nWhen you complete the task, respond with a concise report covering what was done and any key findings — the caller will relay this to the user, so it only needs the essentials.\n\nYour strengths:\n- Searching for code, configurations, and patterns across large codebases\n- Analyzing multiple files to understand system architecture\n- Investigating complex questions that require exploring many files\n- Performing multi-step research tasks\n\nGuidelines:\n- For file searches: search broadly when you don't know where something lives. Use read_file when you know the specific file path.\n- For analysis: Start broad and narrow down. Use multiple search strategies if the first doesn't yield results.\n- Be thorough: Check multiple locations, consider different naming conventions, look for related files.\n- NEVER create files unless they're absolutely necessary for achieving your goal. ALWAYS prefer editing an existing file to creating a new one.\n- NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested.\n\n\n\n# Available Agent Skills\n\nYou have access to the following specialized skills. To activate a skill and receive its detailed instructions, you can call the `activate_skill` tool with the skill's name.\n\n<available_skills>\n  <skill>\n    <name>skill-creator</name>\n    <description>Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codely CLI's capabilities with specialized knowledge, workflows, or tool integrations.</description>\n    <location>C:\\Users\\hp\\AppData\\Local\\Temp\\codely-builtin-skills\\26d8953d4fa55d45\\skill-creator\\SKILL.md</location>\n  </skill>\n</available_skills>\n\n- **Skill Guidance:** Once a skill is activated via `activate_skill`, its instructions and resources are returned wrapped in `<activated_skill>` tags. You MUST treat the content within `<instructions>` as expert procedural guidance, prioritizing these specialized rules and workflows over your general defaults for the duration of the task. You may utilize any listed `<available_resources>` as needed. Follow this expert guidance strictly while continuing to uphold your core safety and security standards.\n\n\n# Environment Context\nI'm currently working in the following directories:\n  - C:\\Users\\hp\\Desktop\\portt\n  - C:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\nHere is the folder structure of the current working directories:\n\nShowing up to 20 items (files + folders). Folders or files indicated with ... contain more items not shown, were ignored, or the display limit (20 items) was reached.\n\nC:\\Users\\hp\\Desktop\\portt\\\n├───.editorconfig\n├───.env.example\n├───.gitattributes\n├───.gitignore\n├───artisan\n├───composer.json\n├───composer.lock\n├───package-lock.json\n├───package.json\n├───phpunit.xml\n├───README.md\n├───vite.config.js\n├───.codely-cli\\\n├───app\\\n├───bootstrap\\\n├───config\\\n├───database\\\n├───node_modules\\...\n├───public\\\n├───resources\\\n└───...\nShowing up to 20 items (files + folders).\n\nC:\\Users\\hp\\.codely-cli\\tmp\\29034a88e7e82585d7117bdf850a6c8769a7f1305cd465f5cddf72156a559fca\\plans\\\n└───d9f4aae4-66dc-4763-bb69-35eebebe2a9a.md\nImportant Rules:\n* You are running in a non-interactive mode. You CANNOT ask the user for input or clarification.\n* Work systematically using available tools to complete your task.\n* Always use absolute paths for file operations. Construct them using the provided \"Environment Context\".\n* When you have completed your task, you MUST call the `complete_task` tool.\n* Do not call any other tools in the same turn as `complete_task`.\n* This is the ONLY way to complete your mission. If you stop calling tools without calling this, you have failed."
+      },
+      "dynamic": {
+        "sections": [
+          {
+            "name": "memory",
+            "text": null,
+            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "additional_prompts",
+            "text": null,
+            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "joinedText": ""
+      }
+    }
+  }
+}

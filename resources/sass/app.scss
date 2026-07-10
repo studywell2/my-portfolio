@@ -1,0 +1,17 @@
+// ===========================================
+// Abideen.dev — Main Stylesheet
+// ===========================================
+
+// Bootstrap 5
+@import 'bootstrap/scss/bootstrap';
+
+// Bootstrap Icons (imported via JS for proper font file resolution)
+
+// Custom Variables
+@import 'variables';
+
+// Animations
+@import 'animations';
+
+// Components
+@import 'components';
