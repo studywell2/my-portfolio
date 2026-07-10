@@ -5,7 +5,6 @@ set -e
 case "$APP_KEY" in
     base64:*) ;;
     *)
-        # Generate a proper Laravel key and write it to .env
         NEW_KEY="base64:$(php -r 'echo base64_encode(random_bytes(32));')"
         if [ -f .env ]; then
             sed -i "s|^APP_KEY=.*|APP_KEY=${NEW_KEY}|" .env
@@ -13,6 +12,20 @@ case "$APP_KEY" in
             echo "APP_KEY=${NEW_KEY}" > .env
         fi
         export APP_KEY="$NEW_KEY"
+        ;;
+esac
+
+# Fix APP_URL to include protocol if missing
+case "$APP_URL" in
+    http://*|https://*) ;;
+    *)
+        if [ -n "$APP_URL" ]; then
+            FIXED_URL="https://${APP_URL}"
+            if [ -f .env ]; then
+                sed -i "s|^APP_URL=.*|APP_URL=${FIXED_URL}|" .env
+            fi
+            export APP_URL="$FIXED_URL"
+        fi
         ;;
 esac
 

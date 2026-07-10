@@ -15,10 +15,7 @@ services:
       - key: APP_NAME
         value: Abideen.dev
       - key: APP_URL
-        fromService:
-          type: web
-          name: abideen-portfolio
-          property: host
+        value: https://abideen-portfolio.onrender.com
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
