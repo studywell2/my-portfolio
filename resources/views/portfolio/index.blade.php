@@ -14,7 +14,6 @@
     <meta name="twitter:title" content="{{ $settings['site_name'] ?? 'Abideen.dev' }}">
     <meta name="twitter:description" content="{{ $settings['hero_subtitle'] ?? 'Full-Stack Developer & Project Manager' }}">
     <title>{{ $settings['site_name'] ?? 'Abideen.dev' }} — {{ $settings['hero_subtitle'] ?? 'Full-Stack Developer' }}</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0a'/><text x='50' y='68' font-size='52' font-weight='bold' text-anchor='middle' fill='%23d4af37' font-family='monospace'>&lt;/&gt;</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -189,7 +188,7 @@
                                 <i class="bi bi-geo-alt-fill"></i>
                                 <div>
                                     <div class="text-muted small">Location</div>
-                                    <div class="fw-600">{{ $settings['location'] ?? 'Nigeria' }}</div>
+                                    <div class="fw-600">{{ $settings['location'] ?? 'Agege lagos, Nigeria' }}</div>
                                 </div>
                             </div>
                         </div>
@@ -560,11 +559,11 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Your Name</label>
-                                <input type="text" class="form-control" name="name" placeholder="John Doe" required>
+                                <input type="text" class="form-control" name="name" placeholder="Abideen" required>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Your Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="john@example.com" required>
+                                <input type="email" class="form-control" name="email" placeholder="abideen@example.com" required>
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Subject</label>
