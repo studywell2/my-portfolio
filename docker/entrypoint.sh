@@ -1,6 +1,21 @@
 #!/bin/sh
 set -e
 
+# Ensure APP_KEY is in Laravel's base64: format
+case "$APP_KEY" in
+    base64:*) ;;
+    *)
+        # Generate a proper Laravel key and write it to .env
+        NEW_KEY="base64:$(php -r 'echo base64_encode(random_bytes(32));')"
+        if [ -f .env ]; then
+            sed -i "s|^APP_KEY=.*|APP_KEY=${NEW_KEY}|" .env
+        else
+            echo "APP_KEY=${NEW_KEY}" > .env
+        fi
+        export APP_KEY="$NEW_KEY"
+        ;;
+esac
+
 # Start PHP-FPM in background
 php-fpm -D
 
