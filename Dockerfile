@@ -6,10 +6,11 @@ RUN apk add --no-cache \
     postgresql-dev \
     libpng-dev \
     libzip-dev \
+    zip \
+    unzip \
     nodejs \
     npm \
-    && docker-php-ext-install pdo_pgsql mbstring exif pcntl bcmath gd zip \
-    && apk del libpng-dev libzip-dev
+    && docker-php-ext-install pdo_pgsql mbstring exif pcntl bcmath gd zip
 
 # Get Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
