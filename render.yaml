@@ -1,0 +1,57 @@
+services:
+  - type: web
+    name: abideen-portfolio
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_NAME
+        value: Abideen.dev
+      - key: APP_URL
+        fromService:
+          type: web
+          name: abideen-portfolio
+          property: host
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: abideen-db
+          property: host
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_DATABASE
+        fromDatabase:
+          name: abideen-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: abideen-db
+          property: username
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: abideen-db
+          property: password
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: FILESYSTEM_DISK
+        value: local
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: error
+
+  - type: psql
+    name: abideen-db
+    plan: free

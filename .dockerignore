@@ -1,0 +1,10 @@
+node_modules
+vendor
+.env
+.git
+.gitignore
+README.md
+phpunit.xml
+.editorconfig
+.gitattributes
+database/database.sqlite
