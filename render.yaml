@@ -52,6 +52,6 @@ services:
       - key: LOG_LEVEL
         value: error
 
-  - type: psql
+  - type: postgres
     name: abideen-db
     plan: free
