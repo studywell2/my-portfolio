@@ -34,7 +34,7 @@ WORKDIR /var/www/html
 
 # Copy composer files and install dependencies
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 # Copy package files and install Node dependencies
 COPY package.json package-lock.json ./
@@ -42,6 +42,9 @@ RUN npm ci
 
 # Copy application source
 COPY . .
+
+# Run composer post-autoload scripts now that artisan exists
+RUN composer dump-autoload --optimize && php artisan package:discover --ansi
 
 # Build frontend assets
 RUN npm run build
