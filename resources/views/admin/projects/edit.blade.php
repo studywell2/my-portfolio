@@ -48,11 +48,12 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Project URL</label>
-                    <input type="url" class="form-control" name="project_url" value="{{ old('project_url', $project->project_url) }}" placeholder="https://...">
+                    <input type="url" class="form-control @error('project_url') is-invalid @enderror" name="project_url" value="{{ old('project_url', $project->project_url) }}" placeholder="https://...">
+                    @error('project_url') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 <div class="col-md-6">
                     <div class="form-check mt-2">
-                        <input type="checkbox" class="form-check-input" name="is_featured" id="is_featured" @checked(old('is_featured', $project->is_featured))>
+                        <input type="checkbox" class="form-check-input" name="is_featured" id="is_featured" value="1" @checked(old('is_featured', $project->is_featured))>
                         <label class="form-check-label" for="is_featured">Featured Project</label>
                     </div>
                 </div>

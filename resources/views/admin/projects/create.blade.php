@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-check mt-2">
-                        <input type="checkbox" class="form-check-input" name="is_featured" id="is_featured" @checked(old('is_featured'))>
+                        <input type="checkbox" class="form-check-input" name="is_featured" id="is_featured" value="1" @checked(old('is_featured'))>
                         <label class="form-check-label" for="is_featured">Featured Project</label>
                     </div>
                 </div>

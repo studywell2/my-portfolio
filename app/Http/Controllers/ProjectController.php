@@ -23,6 +23,10 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->input('project_url') === '#') {
+            $request->merge(['project_url' => null]);
+        }
+
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
@@ -54,6 +58,10 @@ class ProjectController extends Controller
 
     public function update(Request $request, Project $project)
     {
+        if ($request->input('project_url') === '#') {
+            $request->merge(['project_url' => null]);
+        }
+
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
