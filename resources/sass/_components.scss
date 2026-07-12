@@ -1079,10 +1079,11 @@ h1, h2, h3, h4, h5, h6 {
         }
     }
 
-    // Back to top
+    // Back to top — moved to bottom-left on mobile to avoid overlapping with toast container (bottom-right)
     .back-to-top {
         bottom: 1rem;
-        right: 1rem;
+        left: 1rem;
+        right: auto;
         width: 42px;
         height: 42px;
         font-size: 1.1rem;
@@ -1141,6 +1142,17 @@ h1, h2, h3, h4, h5, h6 {
 
     .contact-info-card {
         padding: 0.75rem;
+    }
+
+    // Lightbox — tighten arrows on very narrow screens
+    #lightbox-prev,
+    #lightbox-next {
+        font-size: 1.25rem !important;
+        margin: 0.5rem !important;
+    }
+
+    #lightbox-image {
+        max-width: 88% !important;
     }
 }
 

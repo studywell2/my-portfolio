@@ -811,11 +811,11 @@
                     <button class="btn btn-lg position-absolute top-0 end-0 m-3 text-white" id="lightbox-close" style="font-size:2rem;background:rgba(0,0,0,0.5);border:none">
                         <i class="bi bi-x-lg"></i>
                     </button>
-                    <button class="btn btn-lg position-absolute top-50 start-0 m-3 text-white" id="lightbox-prev" style="font-size:2rem;background:rgba(0,0,0,0.5);border:none">
+                    <button class="btn btn-lg position-absolute top-50 translate-middle-y start-0 m-3 text-white" id="lightbox-prev" style="font-size:2rem;background:rgba(0,0,0,0.5);border:none">
                         <i class="bi bi-chevron-left"></i>
                     </button>
                     <img id="lightbox-image" src="" alt="Project Image" style="max-width:90%;max-height:90vh;border-radius:12px">
-                    <button class="btn btn-lg position-absolute top-50 end-0 m-3 text-white" id="lightbox-next" style="font-size:2rem;background:rgba(0,0,0,0.5);border:none">
+                    <button class="btn btn-lg position-absolute top-50 translate-middle-y end-0 m-3 text-white" id="lightbox-next" style="font-size:2rem;background:rgba(0,0,0,0.5);border:none">
                         <i class="bi bi-chevron-right"></i>
                     </button>
                 </div>
