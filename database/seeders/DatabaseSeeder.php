@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@abideen.dev',
             'password' => bcrypt('password'),
             'email_verified_at' => now(),
+            'is_admin' => true,
         ]);
 
         $this->seedSettings();
