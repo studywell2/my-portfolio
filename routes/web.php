@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::get('/', [PortfolioController::class, 'index'])->name('home');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
 Route::get('/download-cv', [PortfolioController::class, 'downloadCV'])->name('download.cv');
 
 // Admin auth (guest only)
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
-Route::post('/admin/login', [AdminAuthController::class, 'login']);
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1');
 
 // Protected admin routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

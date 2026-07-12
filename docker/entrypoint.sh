@@ -41,9 +41,6 @@ if [ "$USER_COUNT" = "0" ]; then
     php artisan db:seed --force
 fi
 
-# Ensure the admin user has is_admin = true (survives redeploys with existing DB)
-php artisan tinker --execute='App\Models\User::where("is_admin", false)->orWhereNull("is_admin")->update(["is_admin" => true]);' 2>/dev/null || true
-
 # Create storage symlink
 php artisan storage:link 2>/dev/null || true
 

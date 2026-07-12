@@ -48,6 +48,10 @@ services:
         value: stderr
       - key: LOG_LEVEL
         value: error
+      - key: ADMIN_EMAIL
+        value: admin@abideen.dev
+      - key: ADMIN_PASSWORD
+        sync: false
 
 databases:
   - name: abideen-db

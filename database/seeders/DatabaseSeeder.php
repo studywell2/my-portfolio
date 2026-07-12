@@ -15,11 +15,18 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Admin User
+        // Admin User — credentials from env, fail loudly if not set
+        $adminEmail = env('ADMIN_EMAIL', 'admin@abideen.dev');
+        $adminPassword = env('ADMIN_PASSWORD');
+
+        if (!$adminPassword) {
+            throw new \RuntimeException('ADMIN_PASSWORD environment variable is required for seeding. Set it before running db:seed.');
+        }
+
         User::create([
             'name' => 'Akingbehin Abideen',
-            'email' => 'admin@abideen.dev',
-            'password' => bcrypt('password'),
+            'email' => $adminEmail,
+            'password' => bcrypt($adminPassword),
             'email_verified_at' => now(),
             'is_admin' => true,
         ]);
