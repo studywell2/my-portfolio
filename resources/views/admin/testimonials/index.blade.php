@@ -17,7 +17,7 @@
         <div class="card-body">
             @if ($testimonials->count() > 0)
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="table table-hover align-middle mb-0 admin-table-mobile">
                         <thead>
                             <tr>
                                 <th>Author</th>
@@ -30,7 +30,7 @@
                         <tbody>
                             @foreach ($testimonials as $testimonial)
                                 <tr>
-                                    <td>
+                                    <td data-label="Author">
                                         <div class="d-flex align-items-center gap-3">
                                             @if ($testimonial->avatar_path)
                                                 <img src="{{ asset('storage/' . $testimonial->avatar_path) }}" alt="{{ $testimonial->author_name }}" class="rounded-circle" width="40" height="40" style="object-fit: cover">
@@ -47,7 +47,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td data-label="Rating">
                                         <span class="rating-stars" style="color: #d4af37">
                                             @for ($i = 1; $i <= 5; $i++)
                                                 <i class="bi {{ $i <= $testimonial->rating ? 'bi-star-fill' : 'bi-star' }}"></i>
@@ -55,15 +55,15 @@
                                         </span>
                                         <span class="badge bg-secondary-subtle text-secondary ms-1">{{ $testimonial->rating }}/5</span>
                                     </td>
-                                    <td>
+                                    <td data-label="Active">
                                         @if ($testimonial->is_active)
                                             <span class="badge bg-success">Active</span>
                                         @else
                                             <span class="badge bg-secondary">Inactive</span>
                                         @endif
                                     </td>
-                                    <td>{{ $testimonial->sort_order }}</td>
-                                    <td class="text-end">
+                                    <td data-label="Sort Order">{{ $testimonial->sort_order }}</td>
+                                    <td data-label="Actions" class="text-end">
                                         <a href="{{ route('admin.testimonials.edit', $testimonial) }}" class="btn btn-sm btn-outline-gold" title="Edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>

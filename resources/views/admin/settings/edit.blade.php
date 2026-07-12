@@ -118,19 +118,19 @@
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
-                        <div class="col-md-3">
+                        <div class="col-6 col-md-3">
                             <label class="form-label">Projects Completed</label>
                             <input type="number" class="form-control" name="stat_projects" value="{{ old('stat_projects', $settings['stat_projects'] ?? 0) }}">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-6 col-md-3">
                             <label class="form-label">Happy Clients</label>
                             <input type="number" class="form-control" name="stat_clients" value="{{ old('stat_clients', $settings['stat_clients'] ?? 0) }}">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-6 col-md-3">
                             <label class="form-label">Years Experience</label>
                             <input type="number" class="form-control" name="stat_experience" value="{{ old('stat_experience', $settings['stat_experience'] ?? 0) }}">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-6 col-md-3">
                             <label class="form-label">Technologies</label>
                             <input type="number" class="form-control" name="stat_technologies" value="{{ old('stat_technologies', $settings['stat_technologies'] ?? 0) }}">
                         </div>

@@ -3,7 +3,7 @@
 @section('title', 'Projects')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
     <h4 class="fw-bold mb-0">Projects</h4>
     <a href="{{ route('admin.projects.create') }}" class="btn btn-gold">
         <i class="bi bi-plus-lg me-1"></i>Add New Project
@@ -13,7 +13,7 @@
 <div class="card">
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-hover mb-0">
+            <table class="table table-hover mb-0 admin-table-mobile">
                 <thead>
                     <tr>
                         <th>Image</th>
@@ -27,7 +27,7 @@
                 <tbody>
                     @forelse ($projects as $project)
                         <tr>
-                            <td style="width:60px">
+                            <td data-label="Image" style="width:60px">
                                 @if ($project->image_path)
                                     <img src="{{ asset('storage/' . $project->image_path) }}" alt="{{ $project->title }}" class="rounded" style="width:50px;height:38px;object-fit:cover">
                                 @else
@@ -36,17 +36,17 @@
                                     </div>
                                 @endif
                             </td>
-                            <td>{{ $project->title }}</td>
-                            <td>{{ $project->category->name ?? '—' }}</td>
-                            <td>
+                            <td data-label="Title">{{ $project->title }}</td>
+                            <td data-label="Category">{{ $project->category->name ?? '—' }}</td>
+                            <td data-label="Featured">
                                 @if ($project->is_featured)
                                     <span class="badge" style="background:rgba(212,175,55,0.2);color:#d4af37">Featured</span>
                                 @else
                                     <span class="badge bg-secondary">No</span>
                                 @endif
                             </td>
-                            <td>{{ $project->sort_order }}</td>
-                            <td class="text-end">
+                            <td data-label="Sort">{{ $project->sort_order }}</td>
+                            <td data-label="Actions" class="text-end">
                                 <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-sm btn-outline-warning">
                                     <i class="bi bi-pencil"></i>
                                 </a>

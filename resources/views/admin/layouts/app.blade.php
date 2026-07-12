@@ -152,6 +152,61 @@
             }
         }
 
+        @media (max-width: 767.98px) {
+            .admin-content {
+                padding: 1rem 1rem;
+            }
+
+            .admin-topbar {
+                padding: 0.75rem 1rem;
+            }
+
+            .admin-table-mobile thead {
+                display: none;
+            }
+
+            .admin-table-mobile,
+            .admin-table-mobile tbody,
+            .admin-table-mobile tr,
+            .admin-table-mobile td {
+                display: block;
+                width: 100%;
+            }
+
+            .admin-table-mobile tr {
+                margin-bottom: 1rem;
+                border: 1px solid #2a2a2a;
+                border-radius: 12px;
+                padding: 0.75rem 1rem;
+            }
+
+            .admin-table-mobile td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: none;
+                padding: 0.5rem 0;
+                text-align: right;
+            }
+
+            .admin-table-mobile td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #a0a0a0;
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-right: 1rem;
+                white-space: nowrap;
+            }
+
+            .admin-table-mobile td:last-child {
+                justify-content: flex-end;
+                padding-top: 0.75rem;
+                border-top: 1px solid #2a2a2a;
+            }
+        }
+
         .sidebar-overlay {
             display: none;
             position: fixed;
@@ -233,9 +288,9 @@
             <button class="btn btn-link sidebar-toggle text-decoration-none text-light p-0 me-3" onclick="document.getElementById('adminSidebar').classList.toggle('show'); document.getElementById('sidebarOverlay').classList.toggle('show')">
                 <i class="bi bi-list fs-4"></i>
             </button>
-            <h5 class="mb-0 fw-bold">@yield('title', 'Dashboard')</h5>
+            <h5 class="mb-0 fw-bold text-truncate">@yield('title', 'Dashboard')</h5>
             <div class="ms-auto d-flex align-items-center gap-3">
-                <span class="text-muted small">Welcome, {{ auth()->user()->name }}</span>
+                <span class="text-muted small d-none d-sm-inline">Welcome, {{ auth()->user()->name }}</span>
             </div>
         </div>
 
