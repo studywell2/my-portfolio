@@ -390,4 +390,143 @@ document.addEventListener('DOMContentLoaded', function () {
             pause: 'hover',
         });
     }
+
+    // ---- Project Cost Calculator ----
+    const calcSection = document.getElementById('calculator');
+    if (calcSection) {
+        const projectTypeBtns = calcSection.querySelectorAll('.project-type-btn');
+        const pageCountSlider = document.getElementById('page-count');
+        const pageCountDisplay = document.getElementById('page-count-display');
+        const featureCheckboxes = calcSection.querySelectorAll('.feature-checkbox');
+        const totalCostEl = document.getElementById('total-cost');
+        const resetBtn = document.getElementById('calc-reset-btn');
+        const getQuoteBtn = document.getElementById('get-quote-btn');
+        const breakdownType = document.getElementById('breakdown-type');
+        const breakdownTypeCost = document.getElementById('breakdown-type-cost');
+        const breakdownPagesText = document.getElementById('breakdown-pages-text');
+        const breakdownPagesCost = document.getElementById('breakdown-pages-cost');
+        const breakdownFeaturesRow = document.getElementById('breakdown-features-row');
+        const breakdownFeaturesCost = document.getElementById('breakdown-features-cost');
+
+        const PAGE_RATE = 10000;
+        const INCLUDED_PAGES = 5;
+
+        let currentType = 'landing';
+        let currentBase = 50000;
+        let currentTypeName = 'Landing Page';
+
+        function formatNaira(amount) {
+            return '\u20a6' + amount.toLocaleString('en-US');
+        }
+
+        function calculateCost() {
+            const pages = parseInt(pageCountSlider.value);
+            const extraPages = Math.max(0, pages - INCLUDED_PAGES);
+            const pagesCost = extraPages * PAGE_RATE;
+
+            let featuresCost = 0;
+            featureCheckboxes.forEach(cb => {
+                if (cb.checked) featuresCost += parseInt(cb.dataset.cost);
+            });
+
+            const total = currentBase + pagesCost + featuresCost;
+            totalCostEl.textContent = formatNaira(total);
+
+            breakdownType.textContent = currentTypeName;
+            breakdownTypeCost.textContent = formatNaira(currentBase);
+
+            breakdownPagesText.textContent = extraPages > 0
+                ? 'Extra Pages (' + extraPages + ')'
+                : 'Extra Pages (0)';
+            breakdownPagesCost.textContent = formatNaira(pagesCost);
+
+            if (featuresCost > 0) {
+                breakdownFeaturesRow.style.display = 'flex';
+                breakdownFeaturesCost.textContent = formatNaira(featuresCost);
+            } else {
+                breakdownFeaturesRow.style.display = 'none';
+            }
+        }
+
+        projectTypeBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                projectTypeBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentType = this.dataset.type;
+                currentBase = parseInt(this.dataset.base);
+                currentTypeName = this.querySelector('span').textContent;
+                calculateCost();
+            });
+        });
+
+        pageCountSlider.addEventListener('input', function () {
+            pageCountDisplay.textContent = this.value;
+            calculateCost();
+        });
+
+        featureCheckboxes.forEach(cb => {
+            cb.addEventListener('change', calculateCost);
+        });
+
+        resetBtn.addEventListener('click', function () {
+            projectTypeBtns.forEach(b => b.classList.remove('active'));
+            projectTypeBtns[0].classList.add('active');
+            currentType = 'landing';
+            currentBase = 50000;
+            currentTypeName = 'Landing Page';
+
+            pageCountSlider.value = 1;
+            pageCountDisplay.textContent = '1';
+
+            featureCheckboxes.forEach(cb => cb.checked = false);
+
+            calculateCost();
+
+            if (window.showToast) {
+                showToast('Calculator has been reset.', 'info');
+            }
+        });
+
+        getQuoteBtn.addEventListener('click', function () {
+            const pages = parseInt(pageCountSlider.value);
+            const selectedFeatures = [];
+            featureCheckboxes.forEach(cb => {
+                if (cb.checked) {
+                    selectedFeatures.push(cb.parentElement.textContent.trim());
+                }
+            });
+
+            const subjectField = document.querySelector('#contact-form input[name="subject"]');
+            const messageField = document.querySelector('#contact-form textarea[name="message"]');
+
+            if (subjectField) {
+                subjectField.value = 'Project Quote Request — ' + currentTypeName;
+            }
+
+            if (messageField) {
+                let msg = 'Hi Abideen,\n\nI would like to get a quote for the following project:\n\n';
+                msg += '• Project Type: ' + currentTypeName + '\n';
+                msg += '• Number of Pages: ' + pages + '\n';
+                if (selectedFeatures.length > 0) {
+                    msg += '• Extra Features: ' + selectedFeatures.join(', ') + '\n';
+                }
+                msg += '• Estimated Budget: ' + totalCostEl.textContent + '\n\n';
+                msg += 'Please get back to me with a detailed quote. Thank you!';
+                messageField.value = msg;
+            }
+
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                const offset = 80;
+                const targetPosition = contactSection.getBoundingClientRect().top + window.scrollY - offset;
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            }
+
+            if (window.showToast) {
+                showToast('Quote details filled in the contact form below!', 'success');
+            }
+        });
+
+        calculateCost();
+    }
 });

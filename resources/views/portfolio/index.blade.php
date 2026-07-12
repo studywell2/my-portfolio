@@ -63,6 +63,7 @@
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#calculator">Cost Calculator</a></li>
                     <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     <li class="nav-item">
@@ -467,6 +468,153 @@
             @else
                 <p class="text-center text-muted py-5">Testimonials coming soon!</p>
             @endif
+        </div>
+    </section>
+
+    {{-- Project Cost Calculator Section --}}
+    <section id="calculator" class="py-5">
+        <div class="container py-5">
+            <div class="section-heading text-center reveal">
+                <span class="subtitle">Project Budget</span>
+                <h2 class="title">Cost <span class="text-gradient-gold">Calculator</span></h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="row g-4 mt-2 justify-content-center">
+                <div class="col-lg-10">
+                    <div class="calculator-card reveal">
+                        <div class="row g-4">
+                            {{-- Left: Inputs --}}
+                            <div class="col-lg-7">
+                                {{-- Project Type --}}
+                                <div class="mb-4">
+                                    <label class="calc-label">
+                                        <i class="bi bi-diagram-3 me-2"></i>Project Type
+                                    </label>
+                                    <div class="project-type-grid">
+                                        <button type="button" class="project-type-btn active" data-type="landing" data-base="50000">
+                                            <i class="bi bi-file-earmark-code"></i>
+                                            <span>Landing Page</span>
+                                        </button>
+                                        <button type="button" class="project-type-btn" data-type="business" data-base="80000">
+                                            <i class="bi bi-building"></i>
+                                            <span>Business Website</span>
+                                        </button>
+                                        <button type="button" class="project-type-btn" data-type="school" data-base="150000">
+                                            <i class="bi bi-mortarboard"></i>
+                                            <span>School Website</span>
+                                        </button>
+                                        <button type="button" class="project-type-btn" data-type="ecommerce" data-base="200000">
+                                            <i class="bi bi-bag-check"></i>
+                                            <span>E-commerce</span>
+                                        </button>
+                                        <button type="button" class="project-type-btn" data-type="webapp" data-base="300000">
+                                            <i class="bi bi-window-stack"></i>
+                                            <span>Web Application</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {{-- Number of Pages --}}
+                                <div class="mb-4">
+                                    <label class="calc-label">
+                                        <i class="bi bi-files me-2"></i>Number of Pages
+                                        <span class="page-count-badge" id="page-count-display">1</span>
+                                    </label>
+                                    <input type="range" class="form-range calc-range" id="page-count" min="1" max="30" value="1">
+                                    <div class="d-flex justify-content-between mt-1">
+                                        <small class="text-muted">1 page</small>
+                                        <small class="text-muted">30 pages</small>
+                                    </div>
+                                    <small class="text-muted d-block mt-1">First 5 pages included in base price. Each additional page: ₦10,000</small>
+                                </div>
+
+                                {{-- Extra Features --}}
+                                <div>
+                                    <label class="calc-label">
+                                        <i class="bi bi-gear-wide-connected me-2"></i>Extra Features
+                                    </label>
+                                    <div class="features-grid">
+                                        <label class="feature-chip">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="20000">
+                                            <i class="bi bi-search"></i> SEO Optimization
+                                        </label>
+                                        <label class="feature-chip">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="30000">
+                                            <i class="bi bi-credit-card"></i> Payment Gateway
+                                        </label>
+                                        <label class="feature-chip">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="25000">
+                                            <i class="bi bi-shield-lock"></i> User Authentication
+                                        </label>
+                                        <label class="feature-chip">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="40000">
+                                            <i class="bi bi-speedometer2"></i> Admin Dashboard
+                                        </label>
+                                        <label class="feature-chip">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="35000">
+                                            <i class="bi bi-cloud-arrow-up"></i> API Integration
+                                        </label>
+                                        <label class="feature-chip">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="15000">
+                                            <i class="bi bi-chat-dots"></i> Live Chat
+                                        </label>
+                                        <label class="feature-chip">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="35000">
+                                            <i class="bi bi-database-gear"></i> Content Management (CMS)
+                                        </label>
+                                        <label class="feature-chip">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="15000">
+                                            <i class="bi bi-envelope-paper"></i> Email Setup
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Right: Cost Display --}}
+                            <div class="col-lg-5">
+                                <div class="cost-display-panel">
+                                    <div class="cost-breakdown">
+                                        <div class="cost-row">
+                                            <span class="cost-label-text" id="breakdown-type">Landing Page</span>
+                                            <span class="cost-value" id="breakdown-type-cost">₦50,000</span>
+                                        </div>
+                                        <div class="cost-row" id="breakdown-pages-row">
+                                            <span class="cost-label-text" id="breakdown-pages-text">Extra Pages (0)</span>
+                                            <span class="cost-value" id="breakdown-pages-cost">₦0</span>
+                                        </div>
+                                        <div class="cost-row" id="breakdown-features-row" style="display:none">
+                                            <span class="cost-label-text">Extra Features</span>
+                                            <span class="cost-value" id="breakdown-features-cost">₦0</span>
+                                        </div>
+                                    </div>
+
+                                    <hr style="border-color:#2a2a2a;margin:1rem 0">
+
+                                    <div class="total-cost-label">
+                                        <i class="bi bi-calculator me-2"></i>Estimated Total
+                                    </div>
+                                    <div class="total-cost-amount text-gradient-gold" id="total-cost">₦50,000</div>
+
+                                    <div class="cost-note">
+                                        <i class="bi bi-info-circle me-1"></i>
+                                        This is an estimate. Final pricing depends on specific requirements. Let's discuss the details!
+                                    </div>
+
+                                    <div class="d-flex gap-2 mt-3">
+                                        <button type="button" class="btn btn-gold flex-grow-1" id="get-quote-btn">
+                                            <i class="bi bi-send me-2"></i>Get a Quote
+                                        </button>
+                                        <button type="button" class="btn btn-outline-gold" id="calc-reset-btn">
+                                            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
