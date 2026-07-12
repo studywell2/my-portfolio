@@ -34,6 +34,21 @@ class SettingController extends Controller
             'stat_clients' => ['nullable', 'integer'],
             'stat_experience' => ['nullable', 'integer'],
             'stat_technologies' => ['nullable', 'integer'],
+            'calc_base_landing' => ['required', 'integer', 'min:0'],
+            'calc_base_business' => ['required', 'integer', 'min:0'],
+            'calc_base_school' => ['required', 'integer', 'min:0'],
+            'calc_base_ecommerce' => ['required', 'integer', 'min:0'],
+            'calc_base_webapp' => ['required', 'integer', 'min:0'],
+            'calc_per_page' => ['required', 'integer', 'min:0'],
+            'calc_included_pages' => ['required', 'integer', 'min:0'],
+            'calc_feat_seo' => ['required', 'integer', 'min:0'],
+            'calc_feat_payment' => ['required', 'integer', 'min:0'],
+            'calc_feat_auth' => ['required', 'integer', 'min:0'],
+            'calc_feat_dashboard' => ['required', 'integer', 'min:0'],
+            'calc_feat_api' => ['required', 'integer', 'min:0'],
+            'calc_feat_chat' => ['required', 'integer', 'min:0'],
+            'calc_feat_cms' => ['required', 'integer', 'min:0'],
+            'calc_feat_email' => ['required', 'integer', 'min:0'],
         ]);
 
         // Process typing words into JSON
@@ -46,6 +61,12 @@ class SettingController extends Controller
             'current_role', 'location', 'email', 'phone', 'whatsapp',
             'github_url', 'linkedin_url',
             'stat_projects', 'stat_clients', 'stat_experience', 'stat_technologies',
+            'calc_base_landing', 'calc_base_business', 'calc_base_school',
+            'calc_base_ecommerce', 'calc_base_webapp',
+            'calc_per_page', 'calc_included_pages',
+            'calc_feat_seo', 'calc_feat_payment', 'calc_feat_auth',
+            'calc_feat_dashboard', 'calc_feat_api', 'calc_feat_chat',
+            'calc_feat_cms', 'calc_feat_email',
         ];
 
         foreach ($textKeys as $key) {

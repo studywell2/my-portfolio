@@ -408,12 +408,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const breakdownFeaturesRow = document.getElementById('breakdown-features-row');
         const breakdownFeaturesCost = document.getElementById('breakdown-features-cost');
 
-        const PAGE_RATE = 10000;
-        const INCLUDED_PAGES = 5;
+        const PAGE_RATE = parseInt(pageCountSlider.dataset.perPage) || 10000;
+        const INCLUDED_PAGES = parseInt(pageCountSlider.dataset.included) || 5;
 
-        let currentType = 'landing';
-        let currentBase = 50000;
-        let currentTypeName = 'Landing Page';
+        let currentType = projectTypeBtns[0].dataset.type;
+        let currentBase = parseInt(projectTypeBtns[0].dataset.base) || 50000;
+        let currentTypeName = projectTypeBtns[0].querySelector('span').textContent;
 
         function formatNaira(amount) {
             return '\u20a6' + amount.toLocaleString('en-US');
@@ -471,9 +471,9 @@ document.addEventListener('DOMContentLoaded', function () {
         resetBtn.addEventListener('click', function () {
             projectTypeBtns.forEach(b => b.classList.remove('active'));
             projectTypeBtns[0].classList.add('active');
-            currentType = 'landing';
-            currentBase = 50000;
-            currentTypeName = 'Landing Page';
+            currentType = projectTypeBtns[0].dataset.type;
+            currentBase = parseInt(projectTypeBtns[0].dataset.base);
+            currentTypeName = projectTypeBtns[0].querySelector('span').textContent;
 
             pageCountSlider.value = 1;
             pageCountDisplay.textContent = '1';

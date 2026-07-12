@@ -139,6 +139,132 @@
             </div>
         </div>
 
+        {{-- Calculator Pricing --}}
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold"><i class="bi bi-calculator me-2"></i>Calculator Pricing</h6>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small mb-3">Set the base prices for each project type and extra feature. These values are used by the cost calculator on your portfolio.</p>
+
+                    <h6 class="fw-bold mb-3 text-gradient-gold">Project Type Base Prices</h6>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6 col-md-4">
+                            <label class="form-label">Landing Page</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_base_landing" value="{{ old('calc_base_landing', $settings['calc_base_landing'] ?? 50000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <label class="form-label">Business Website</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_base_business" value="{{ old('calc_base_business', $settings['calc_base_business'] ?? 80000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <label class="form-label">School Website</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_base_school" value="{{ old('calc_base_school', $settings['calc_base_school'] ?? 150000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <label class="form-label">E-commerce</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_base_ecommerce" value="{{ old('calc_base_ecommerce', $settings['calc_base_ecommerce'] ?? 200000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <label class="form-label">Web Application</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_base_webapp" value="{{ old('calc_base_webapp', $settings['calc_base_webapp'] ?? 300000) }}" min="0" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h6 class="fw-bold mb-3 text-gradient-gold">Page Pricing</h6>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6 col-md-6">
+                            <label class="form-label">Cost Per Extra Page</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_per_page" value="{{ old('calc_per_page', $settings['calc_per_page'] ?? 10000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <label class="form-label">Pages Included in Base</label>
+                            <input type="number" class="form-control" name="calc_included_pages" value="{{ old('calc_included_pages', $settings['calc_included_pages'] ?? 5) }}" min="0" required>
+                        </div>
+                    </div>
+
+                    <h6 class="fw-bold mb-3 text-gradient-gold">Extra Feature Prices</h6>
+                    <div class="row g-3">
+                        <div class="col-6 col-md-3">
+                            <label class="form-label">SEO Optimization</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_feat_seo" value="{{ old('calc_feat_seo', $settings['calc_feat_seo'] ?? 20000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label class="form-label">Payment Gateway</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_feat_payment" value="{{ old('calc_feat_payment', $settings['calc_feat_payment'] ?? 30000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label class="form-label">User Authentication</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_feat_auth" value="{{ old('calc_feat_auth', $settings['calc_feat_auth'] ?? 25000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label class="form-label">Admin Dashboard</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_feat_dashboard" value="{{ old('calc_feat_dashboard', $settings['calc_feat_dashboard'] ?? 40000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label class="form-label">API Integration</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_feat_api" value="{{ old('calc_feat_api', $settings['calc_feat_api'] ?? 35000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label class="form-label">Live Chat</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_feat_chat" value="{{ old('calc_feat_chat', $settings['calc_feat_chat'] ?? 15000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label class="form-label">Content Management (CMS)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_feat_cms" value="{{ old('calc_feat_cms', $settings['calc_feat_cms'] ?? 35000) }}" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label class="form-label">Email Setup</label>
+                            <div class="input-group">
+                                <span class="input-group-text">&#8358;</span>
+                                <input type="number" class="form-control" name="calc_feat_email" value="{{ old('calc_feat_email', $settings['calc_feat_email'] ?? 15000) }}" min="0" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- CV Upload --}}
         <div class="col-12">
             <div class="card">

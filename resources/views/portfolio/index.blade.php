@@ -492,23 +492,23 @@
                                         <i class="bi bi-diagram-3 me-2"></i>Project Type
                                     </label>
                                     <div class="project-type-grid">
-                                        <button type="button" class="project-type-btn active" data-type="landing" data-base="50000">
+                                        <button type="button" class="project-type-btn active" data-type="landing" data-base="{{ $calcSettings['base_landing'] }}">
                                             <i class="bi bi-file-earmark-code"></i>
                                             <span>Landing Page</span>
                                         </button>
-                                        <button type="button" class="project-type-btn" data-type="business" data-base="80000">
+                                        <button type="button" class="project-type-btn" data-type="business" data-base="{{ $calcSettings['base_business'] }}">
                                             <i class="bi bi-building"></i>
                                             <span>Business Website</span>
                                         </button>
-                                        <button type="button" class="project-type-btn" data-type="school" data-base="150000">
+                                        <button type="button" class="project-type-btn" data-type="school" data-base="{{ $calcSettings['base_school'] }}">
                                             <i class="bi bi-mortarboard"></i>
                                             <span>School Website</span>
                                         </button>
-                                        <button type="button" class="project-type-btn" data-type="ecommerce" data-base="200000">
+                                        <button type="button" class="project-type-btn" data-type="ecommerce" data-base="{{ $calcSettings['base_ecommerce'] }}">
                                             <i class="bi bi-bag-check"></i>
                                             <span>E-commerce</span>
                                         </button>
-                                        <button type="button" class="project-type-btn" data-type="webapp" data-base="300000">
+                                        <button type="button" class="project-type-btn" data-type="webapp" data-base="{{ $calcSettings['base_webapp'] }}">
                                             <i class="bi bi-window-stack"></i>
                                             <span>Web Application</span>
                                         </button>
@@ -521,12 +521,12 @@
                                         <i class="bi bi-files me-2"></i>Number of Pages
                                         <span class="page-count-badge" id="page-count-display">1</span>
                                     </label>
-                                    <input type="range" class="form-range calc-range" id="page-count" min="1" max="30" value="1">
+                                    <input type="range" class="form-range calc-range" id="page-count" min="1" max="30" value="1" data-per-page="{{ $calcSettings['per_page'] }}" data-included="{{ $calcSettings['included_pages'] }}">
                                     <div class="d-flex justify-content-between mt-1">
                                         <small class="text-muted">1 page</small>
                                         <small class="text-muted">30 pages</small>
                                     </div>
-                                    <small class="text-muted d-block mt-1">First 5 pages included in base price. Each additional page: ₦10,000</small>
+                                    <small class="text-muted d-block mt-1">First {{ $calcSettings['included_pages'] }} pages included in base price. Each additional page: &#8358;{{ number_format($calcSettings['per_page']) }}</small>
                                 </div>
 
                                 {{-- Extra Features --}}
@@ -536,35 +536,35 @@
                                     </label>
                                     <div class="features-grid">
                                         <label class="feature-chip">
-                                            <input type="checkbox" class="feature-checkbox" data-cost="20000">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="{{ $calcSettings['feat_seo'] }}">
                                             <i class="bi bi-search"></i> SEO Optimization
                                         </label>
                                         <label class="feature-chip">
-                                            <input type="checkbox" class="feature-checkbox" data-cost="30000">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="{{ $calcSettings['feat_payment'] }}">
                                             <i class="bi bi-credit-card"></i> Payment Gateway
                                         </label>
                                         <label class="feature-chip">
-                                            <input type="checkbox" class="feature-checkbox" data-cost="25000">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="{{ $calcSettings['feat_auth'] }}">
                                             <i class="bi bi-shield-lock"></i> User Authentication
                                         </label>
                                         <label class="feature-chip">
-                                            <input type="checkbox" class="feature-checkbox" data-cost="40000">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="{{ $calcSettings['feat_dashboard'] }}">
                                             <i class="bi bi-speedometer2"></i> Admin Dashboard
                                         </label>
                                         <label class="feature-chip">
-                                            <input type="checkbox" class="feature-checkbox" data-cost="35000">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="{{ $calcSettings['feat_api'] }}">
                                             <i class="bi bi-cloud-arrow-up"></i> API Integration
                                         </label>
                                         <label class="feature-chip">
-                                            <input type="checkbox" class="feature-checkbox" data-cost="15000">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="{{ $calcSettings['feat_chat'] }}">
                                             <i class="bi bi-chat-dots"></i> Live Chat
                                         </label>
                                         <label class="feature-chip">
-                                            <input type="checkbox" class="feature-checkbox" data-cost="35000">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="{{ $calcSettings['feat_cms'] }}">
                                             <i class="bi bi-database-gear"></i> Content Management (CMS)
                                         </label>
                                         <label class="feature-chip">
-                                            <input type="checkbox" class="feature-checkbox" data-cost="15000">
+                                            <input type="checkbox" class="feature-checkbox" data-cost="{{ $calcSettings['feat_email'] }}">
                                             <i class="bi bi-envelope-paper"></i> Email Setup
                                         </label>
                                     </div>
@@ -577,7 +577,7 @@
                                     <div class="cost-breakdown">
                                         <div class="cost-row">
                                             <span class="cost-label-text" id="breakdown-type">Landing Page</span>
-                                            <span class="cost-value" id="breakdown-type-cost">₦50,000</span>
+                                            <span class="cost-value" id="breakdown-type-cost">&#8358;{{ number_format($calcSettings['base_landing']) }}</span>
                                         </div>
                                         <div class="cost-row" id="breakdown-pages-row">
                                             <span class="cost-label-text" id="breakdown-pages-text">Extra Pages (0)</span>
@@ -594,7 +594,7 @@
                                     <div class="total-cost-label">
                                         <i class="bi bi-calculator me-2"></i>Estimated Total
                                     </div>
-                                    <div class="total-cost-amount text-gradient-gold" id="total-cost">₦50,000</div>
+                                    <div class="total-cost-amount text-gradient-gold" id="total-cost">&#8358;{{ number_format($calcSettings['base_landing']) }}</div>
 
                                     <div class="cost-note">
                                         <i class="bi bi-info-circle me-1"></i>

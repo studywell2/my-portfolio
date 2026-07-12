@@ -58,6 +58,25 @@ class DatabaseSeeder extends Seeder
             'stat_clients' => '30',
             'stat_experience' => '5',
             'stat_technologies' => '15',
+
+            // Calculator: project type base prices
+            'calc_base_landing' => '50000',
+            'calc_base_business' => '80000',
+            'calc_base_school' => '150000',
+            'calc_base_ecommerce' => '200000',
+            'calc_base_webapp' => '300000',
+            // Calculator: page pricing
+            'calc_per_page' => '10000',
+            'calc_included_pages' => '5',
+            // Calculator: feature prices
+            'calc_feat_seo' => '20000',
+            'calc_feat_payment' => '30000',
+            'calc_feat_auth' => '25000',
+            'calc_feat_dashboard' => '40000',
+            'calc_feat_api' => '35000',
+            'calc_feat_chat' => '15000',
+            'calc_feat_cms' => '35000',
+            'calc_feat_email' => '15000',
         ];
 
         foreach ($settings as $key => $value) {
