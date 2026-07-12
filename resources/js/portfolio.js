@@ -31,26 +31,33 @@ document.addEventListener('DOMContentLoaded', function () {
     // ---- Dark/Light Theme Toggle ----
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    const themeIconMobile = document.getElementById('theme-icon-mobile');
     const html = document.documentElement;
 
     const savedTheme = localStorage.getItem('theme') || 'dark';
     html.setAttribute('data-bs-theme', savedTheme);
     updateThemeIcon(savedTheme);
 
+    function toggleTheme() {
+        const currentTheme = html.getAttribute('data-bs-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-bs-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    }
+
     if (themeToggle) {
-        themeToggle.addEventListener('click', function () {
-            const currentTheme = html.getAttribute('data-bs-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-bs-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        });
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+    if (themeToggleMobile) {
+        themeToggleMobile.addEventListener('click', toggleTheme);
     }
 
     function updateThemeIcon(theme) {
-        if (themeIcon) {
-            themeIcon.className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
-        }
+        const iconClass = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+        if (themeIcon) themeIcon.className = iconClass;
+        if (themeIconMobile) themeIconMobile.className = iconClass;
     }
 
     // ---- Typing Animation ----
@@ -266,11 +273,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
                 window.scrollTo({ top: targetPosition, behavior: 'smooth' });
 
-                // Close mobile navbar
-                const navCollapse = document.querySelector('.navbar-collapse');
-                if (navCollapse && navCollapse.classList.contains('show')) {
-                    const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
-                    if (bsCollapse) bsCollapse.hide();
+                // Close mobile offcanvas
+                const navOffcanvas = document.getElementById('navOffcanvas');
+                if (navOffcanvas && navOffcanvas.classList.contains('show')) {
+                    const bsOffcanvas = bootstrap.Offcanvas.getInstance(navOffcanvas);
+                    if (bsOffcanvas) bsOffcanvas.hide();
                 }
             }
         });

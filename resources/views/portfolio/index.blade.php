@@ -52,13 +52,11 @@
     {{-- Navbar --}}
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="main-navbar">
         <div class="container">
-            <div class="navbar-top-row">
-                <a class="navbar-brand text-gradient-gold" href="#home">Abideen.dev</a>
-                <button class="navbar-toggler border-0 p-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
-                    <i class="bi bi-list text-light" style="font-size:1.4rem"></i>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <a class="navbar-brand text-gradient-gold" href="#home">Abideen.dev</a>
+            <button class="navbar-toggler border-0 p-1 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navOffcanvas" aria-label="Toggle navigation">
+                <i class="bi bi-list text-light" style="font-size:1.4rem"></i>
+            </button>
+            <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
@@ -80,6 +78,34 @@
             </div>
         </div>
     </nav>
+
+    {{-- Mobile Offcanvas Nav --}}
+    <div class="offcanvas offcanvas-end nav-offcanvas" tabindex="-1" id="navOffcanvas">
+        <div class="offcanvas-header">
+            <span class="offcanvas-title text-gradient-gold">Menu</span>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav gap-1">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="#calculator">Cost Calculator</a></li>
+                <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item mt-2">
+                    <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle theme">
+                        <i id="theme-icon-mobile" class="bi bi-sun"></i>
+                    </button>
+                </li>
+                <li class="nav-item mt-2">
+                    <a href="#contact" class="btn btn-gold btn-sm px-3 w-100">Hire Me</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     {{-- Hero Section --}}
     <section id="home" class="hero-section">

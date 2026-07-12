@@ -808,75 +808,58 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-// ---- Desktop (≥992px) ----
-@media (min-width: 992px) {
-    .navbar-custom .navbar-top-row {
-        display: contents;
-    }
-}
-
 // ===========================================
 // Responsive — Mobile & Tablet
 // ===========================================
 
-// ---- Tablet (≤991px) ----
-@media (max-width: 991.98px) {
-    // Navbar mobile menu
-    .navbar-custom {
-        padding: 0.75rem 0;
+// ---- Offcanvas Mobile Nav ----
+.nav-offcanvas {
+    --bs-offcanvas-width: 300px;
+    background: rgba($dark-bg, 0.98);
+    backdrop-filter: blur(12px);
 
-        .navbar-top-row {
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .offcanvas-header {
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid $dark-border;
 
-        .navbar-collapse {
-            flex-basis: 100%;
-            width: 100%;
-            background: rgba($dark-bg, 0.98);
-            margin-top: 0.75rem;
-            padding: 1.25rem;
-            border-radius: $radius-md;
-            border: 1px solid $dark-border;
-            max-height: 75vh;
-            overflow-y: auto;
-
-            .navbar-nav {
-                gap: 0.25rem !important;
-            }
-
-            .nav-link {
-                padding: 0.75rem 1rem;
-                border-radius: $radius-sm;
-
-                &::after {
-                    display: none;
-                }
-            }
+        .offcanvas-title {
+            font-family: $font-family-heading;
+            font-weight: 700;
+            font-size: 1.25rem;
         }
     }
 
-    [data-bs-theme="light"] .navbar-custom .navbar-collapse {
-        background: rgba($light-bg, 0.98);
+    .offcanvas-body {
+        padding: 1.25rem 1.5rem;
+
+        .nav-link {
+            padding: 0.75rem 1rem;
+            border-radius: $radius-sm;
+            font-weight: 500;
+            color: #e0e0e0;
+
+            &:hover, &.active {
+                background: rgba($gold, 0.1);
+                color: $gold;
+            }
+        }
+    }
+}
+
+[data-bs-theme="light"] .nav-offcanvas {
+    background: rgba($light-bg, 0.98);
+
+    .offcanvas-header {
         border-color: $light-border;
     }
 
-    // Hero avatar
-    .hero-section .hero-avatar {
-        width: 220px;
-        height: 220px;
-    }
+    .offcanvas-body .nav-link {
+        color: #333;
 
-    // Testimonial padding
-    .testimonial-card {
-        padding: 1.75rem;
-    }
-
-    // Footer
-    .footer-section {
-        padding: 3rem 0 1.5rem;
+        &:hover, &.active {
+            background: rgba($gold, 0.1);
+            color: $gold;
+        }
     }
 }
 
