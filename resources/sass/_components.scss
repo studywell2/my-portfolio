@@ -812,63 +812,53 @@ h1, h2, h3, h4, h5, h6 {
 // Responsive — Mobile & Tablet
 // ===========================================
 
-// ---- Mobile Nav (dropdown style, < lg) ----
-.navbar-nav.d-lg-none {
-    .nav-link {
-        font-size: 0.85rem;
-        font-weight: 500;
-        padding: 0.35rem 0.4rem;
-        white-space: nowrap;
-        color: #e0e0e0;
+// ---- Offcanvas Mobile Nav ----
+.nav-offcanvas {
+    --bs-offcanvas-width: 300px;
+    background: rgba($dark-bg, 0.98);
+    backdrop-filter: blur(12px);
 
-        &.dropdown-toggle::after {
-            margin-left: 0.2rem;
-            vertical-align: middle;
+    .offcanvas-header {
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid $dark-border;
+
+        .offcanvas-title {
+            font-family: $font-family-heading;
+            font-weight: 700;
+            font-size: 1.25rem;
         }
     }
 
-    .dropdown-menu {
-        background: $dark-card;
-        border: 1px solid $dark-border;
-        border-radius: $radius-md;
+    .offcanvas-body {
+        padding: 1.25rem 1.5rem;
 
-        .dropdown-item {
+        .nav-link {
+            padding: 0.75rem 1rem;
+            border-radius: $radius-sm;
+            font-weight: 500;
             color: #e0e0e0;
-            padding: 0.6rem 1rem;
-            font-size: 0.875rem;
 
-            &:hover, &:active {
+            &:hover, &.active {
                 background: rgba($gold, 0.1);
                 color: $gold;
             }
-        }
-
-        .dropdown-divider {
-            border-color: $dark-border;
         }
     }
 }
 
-[data-bs-theme="light"] .navbar-nav.d-lg-none {
-    .nav-link {
-        color: $light-text;
+[data-bs-theme="light"] .nav-offcanvas {
+    background: rgba($light-bg, 0.98);
+
+    .offcanvas-header {
+        border-color: $light-border;
     }
 
-    .dropdown-menu {
-        background: $light-card;
-        border-color: $light-border;
+    .offcanvas-body .nav-link {
+        color: #333;
 
-        .dropdown-item {
-            color: $light-text;
-
-            &:hover, &:active {
-                background: rgba($gold, 0.1);
-                color: $gold;
-            }
-        }
-
-        .dropdown-divider {
-            border-color: $light-border;
+        &:hover, &.active {
+            background: rgba($gold, 0.1);
+            color: $gold;
         }
     }
 }
@@ -886,6 +876,14 @@ h1, h2, h3, h4, h5, h6 {
 
         .navbar-brand {
             font-size: 1.1rem;
+        }
+
+        .navbar-toggler {
+            padding: 0.2rem 0.4rem;
+
+            i {
+                font-size: 1.25rem;
+            }
         }
     }
 
