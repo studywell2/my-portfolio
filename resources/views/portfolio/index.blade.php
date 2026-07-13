@@ -53,9 +53,34 @@
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="main-navbar">
         <div class="container">
             <a class="navbar-brand text-gradient-gold" href="#home">Abideen.dev</a>
-            <button class="navbar-toggler border-0 p-1 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navOffcanvas" aria-label="Toggle navigation">
-                <i class="bi bi-list text-light" style="font-size:1.4rem"></i>
-            </button>
+            {{-- Mobile compact nav (visible below lg) --}}
+            <ul class="navbar-nav d-lg-none flex-row align-items-center gap-1 ms-auto">
+                <li class="nav-item"><a class="nav-link px-2" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="#contact">Contact</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">More</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#about">About</a></li>
+                        <li><a class="dropdown-item" href="#services">Services</a></li>
+                        <li><a class="dropdown-item" href="#skills">Skills</a></li>
+                        <li><a class="dropdown-item" href="#calculator">Cost Calculator</a></li>
+                        <li><a class="dropdown-item" href="#testimonials">Testimonials</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <button class="dropdown-item d-flex align-items-center gap-2" id="theme-toggle-mobile">
+                                <i id="theme-icon-mobile" class="bi bi-sun"></i>
+                                <span>Toggle Theme</span>
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-1">
+                    <a href="#contact" class="btn btn-gold btn-sm px-3">Hire Me</a>
+                </li>
+            </ul>
+
+            {{-- Desktop nav (visible at lg and above) --}}
             <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
@@ -78,34 +103,6 @@
             </div>
         </div>
     </nav>
-
-    {{-- Mobile Offcanvas Nav --}}
-    <div class="offcanvas offcanvas-end nav-offcanvas" tabindex="-1" id="navOffcanvas">
-        <div class="offcanvas-header">
-            <span class="offcanvas-title text-gradient-gold">Menu</span>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="navbar-nav gap-1">
-                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                <li class="nav-item"><a class="nav-link" href="#calculator">Cost Calculator</a></li>
-                <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                <li class="nav-item mt-2">
-                    <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle theme">
-                        <i id="theme-icon-mobile" class="bi bi-sun"></i>
-                    </button>
-                </li>
-                <li class="nav-item mt-2">
-                    <a href="#contact" class="btn btn-gold btn-sm px-3 w-100">Hire Me</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 
     {{-- Hero Section --}}
     <section id="home" class="hero-section">

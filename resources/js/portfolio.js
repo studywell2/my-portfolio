@@ -308,11 +308,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
                 window.scrollTo({ top: targetPosition, behavior: 'smooth' });
 
-                // Close mobile offcanvas
-                const navOffcanvas = document.getElementById('navOffcanvas');
-                if (navOffcanvas && navOffcanvas.classList.contains('show')) {
-                    const bsOffcanvas = bootstrap.Offcanvas.getInstance(navOffcanvas);
-                    if (bsOffcanvas) bsOffcanvas.hide();
+                // Close mobile dropdown if open
+                const mobileDropdown = document.querySelector('.navbar-nav.d-lg-none .dropdown.show');
+                if (mobileDropdown) {
+                    const bsDropdown = bootstrap.Dropdown.getInstance(mobileDropdown.querySelector('.dropdown-toggle'));
+                    if (bsDropdown) bsDropdown.hide();
                 }
             }
         });
