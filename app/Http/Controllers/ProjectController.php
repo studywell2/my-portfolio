@@ -31,14 +31,36 @@ class ProjectController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
             'description' => ['required', 'string'],
+            'overview' => ['nullable', 'string'],
+            'problem_statement' => ['nullable', 'string'],
+            'solution' => ['nullable', 'string'],
+            'key_features' => ['nullable', 'string'],
+            'technologies_used' => ['nullable', 'string'],
+            'challenges' => ['nullable', 'string'],
+            'challenges_solved' => ['nullable', 'string'],
+            'results_impact' => ['nullable', 'string'],
             'image_path' => ['nullable', 'image', 'max:2048'],
+            'hero_image_path' => ['nullable', 'image', 'max:4096'],
             'project_url' => ['nullable', 'url'],
+            'github_url' => ['nullable', 'url'],
             'is_featured' => ['boolean'],
             'sort_order' => ['nullable', 'integer'],
         ]);
 
         if ($request->hasFile('image_path')) {
             $validated['image_path'] = $request->file('image_path')->store('projects', 'public');
+        }
+
+        if ($request->hasFile('hero_image_path')) {
+            $validated['hero_image_path'] = $request->file('hero_image_path')->store('projects', 'public');
+        }
+
+        // Convert comma-separated strings to arrays
+        if (!empty($validated['key_features'])) {
+            $validated['key_features'] = array_map('trim', explode(',', $validated['key_features']));
+        }
+        if (!empty($validated['technologies_used'])) {
+            $validated['technologies_used'] = array_map('trim', explode(',', $validated['technologies_used']));
         }
 
         $validated['slug'] = Str::slug($validated['title']);
@@ -66,14 +88,36 @@ class ProjectController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
             'description' => ['required', 'string'],
+            'overview' => ['nullable', 'string'],
+            'problem_statement' => ['nullable', 'string'],
+            'solution' => ['nullable', 'string'],
+            'key_features' => ['nullable', 'string'],
+            'technologies_used' => ['nullable', 'string'],
+            'challenges' => ['nullable', 'string'],
+            'challenges_solved' => ['nullable', 'string'],
+            'results_impact' => ['nullable', 'string'],
             'image_path' => ['nullable', 'image', 'max:2048'],
+            'hero_image_path' => ['nullable', 'image', 'max:4096'],
             'project_url' => ['nullable', 'url'],
+            'github_url' => ['nullable', 'url'],
             'is_featured' => ['boolean'],
             'sort_order' => ['nullable', 'integer'],
         ]);
 
         if ($request->hasFile('image_path')) {
             $validated['image_path'] = $request->file('image_path')->store('projects', 'public');
+        }
+
+        if ($request->hasFile('hero_image_path')) {
+            $validated['hero_image_path'] = $request->file('hero_image_path')->store('projects', 'public');
+        }
+
+        // Convert comma-separated strings to arrays
+        if (!empty($validated['key_features'])) {
+            $validated['key_features'] = array_map('trim', explode(',', $validated['key_features']));
+        }
+        if (!empty($validated['technologies_used'])) {
+            $validated['technologies_used'] = array_map('trim', explode(',', $validated['technologies_used']));
         }
 
         $validated['slug'] = Str::slug($validated['title']);

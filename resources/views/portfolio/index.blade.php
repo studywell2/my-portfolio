@@ -382,23 +382,51 @@
                 <div class="divider"></div>
             </div>
 
+            {{-- Project Search --}}
+            <div class="project-search-bar reveal mb-4">
+                <div class="search-input-wrapper">
+                    <i class="bi bi-search search-icon"></i>
+                    <input type="text" id="project-search" class="form-control search-input" placeholder="Search projects...">
+                </div>
+            </div>
+
             {{-- Project Filters --}}
-            <div class="d-flex justify-content-center flex-wrap gap-2 mb-5 project-filter reveal">
+            <div class="d-flex justify-content-center flex-wrap gap-2 mb-3 project-filter reveal">
                 <button class="filter-btn active" data-filter="all">All</button>
                 @foreach ($categories as $category)
                     <button class="filter-btn" data-filter="{{ $category->id }}">{{ $category->name }}</button>
                 @endforeach
             </div>
 
+            {{-- Tech Filters --}}
+            @php
+                $allTechs = collect();
+                foreach ($projects as $p) {
+                    if ($p->technologies_used) {
+                        foreach ((array) $p->technologies_used as $t) {
+                            $t = trim($t);
+                            if ($t && !$allTechs->contains($t)) $allTechs->push($t);
+                        }
+                    }
+                }
+            @endphp
+            @if ($allTechs->count() > 0)
+                <div class="d-flex justify-content-center flex-wrap gap-2 mb-5 tech-filter reveal">
+                    @foreach ($allTechs as $tech)
+                        <button class="tech-filter-btn" data-tech="{{ strtolower($tech) }}">{{ $tech }}</button>
+                    @endforeach
+                </div>
+            @endif
+
             {{-- Project Grid --}}
-            <div class="row g-4">
+            <div class="row g-4" id="project-grid">
                 @forelse ($projects as $project)
-                    <div class="col-md-6 col-lg-4 project-item reveal-scale" data-category="{{ $project->category_id }}" style="animation-delay:{{ ($loop->index % 3) * 0.1 }}s">
+                    <div class="col-md-6 col-lg-4 project-item reveal-scale" data-category="{{ $project->category_id }}" data-title="{{ strtolower($project->title) }}" data-desc="{{ strtolower($project->description) }}" data-techs="{{ strtolower(implode(',', (array) ($project->technologies_used ?? []))) }}" style="animation-delay:{{ ($loop->index % 3) * 0.1 }}s">
                         <div class="project-card">
                             <div class="project-image">
                                 @if ($project->image_path)
                                     <a href="{{ asset('storage/' . $project->image_path) }}" data-lightbox>
-                                        <img src="{{ asset('storage/' . $project->image_path) }}" alt="{{ $project->title }}">
+                                        <img src="{{ asset('storage/' . $project->image_path) }}" alt="{{ $project->title }}" loading="lazy">
                                     </a>
                                 @else
                                     <div class="d-flex align-items-center justify-content-center h-100" style="background:linear-gradient(135deg,#1a1a1a,#2a2a2a)">
@@ -408,9 +436,14 @@
                                 <div class="project-overlay">
                                     <h5 class="fw-bold">{{ $project->title }}</h5>
                                     <p class="small mb-3">{{ \Illuminate\Support\Str::limit($project->description, 100) }}</p>
-                                    <div class="d-flex gap-2 justify-content-center">
+                                    <div class="d-flex gap-2 justify-content-center flex-wrap">
+                                        @if ($project->overview || $project->problem_statement || $project->solution)
+                                            <a href="{{ route('case-study.show', $project->slug) }}" class="btn btn-gold btn-sm">
+                                                <i class="bi bi-file-earmark-text me-1"></i>Case Study
+                                            </a>
+                                        @endif
                                         @if ($project->project_url && $project->project_url !== '#')
-                                            <a href="{{ $project->project_url }}" target="_blank" class="btn btn-gold btn-sm">
+                                            <a href="{{ $project->project_url }}" target="_blank" class="btn btn-outline-gold btn-sm">
                                                 <i class="bi bi-box-arrow-up-right me-1"></i>Visit
                                             </a>
                                         @endif
@@ -425,16 +458,27 @@
                             <div class="project-info">
                                 <span class="project-category">{{ $project->category->name ?? 'Project' }}</span>
                                 <h5>{{ $project->title }}</h5>
-                                <p class="text-muted small mb-0">{{ \Illuminate\Support\Str::limit($project->description, 80) }}</p>
+                                <p class="text-muted small mb-2">{{ \Illuminate\Support\Str::limit($project->description, 80) }}</p>
+                                @if ($project->technologies_used && count((array) $project->technologies_used) > 0)
+                                    <div class="project-tech-tags">
+                                        @foreach ((array) $project->technologies_used as $tech)
+                                            <span class="tech-tag">{{ $tech }}</span>
+                                        @endforeach
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
                 @empty
-                    <div class="col-12 text-center text-muted py-5">
+                    <div class="col-12 text-center text-muted py-5" id="no-projects">
                         <i class="bi bi-folder-x" style="font-size:3rem;opacity:0.3"></i>
                         <p class="mt-3">Projects coming soon!</p>
                     </div>
                 @endforelse
+            </div>
+            <div class="col-12 text-center text-muted py-5" id="no-search-results" style="display:none">
+                <i class="bi bi-search" style="font-size:3rem;opacity:0.3"></i>
+                <p class="mt-3">No projects match your search.</p>
             </div>
         </div>
     </section>
@@ -848,6 +892,66 @@
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    {{-- AI Knowledge Base Data --}}
+    <script type="application/json" id="ai-knowledge-base">{{ json_encode([
+        'settings' => [
+            'hero_title' => $settings['hero_title'] ?? null,
+            'hero_subtitle' => $settings['hero_subtitle'] ?? null,
+            'current_role' => $settings['current_role'] ?? null,
+            'about_bio' => $settings['about_bio'] ?? null,
+            'location' => $settings['location'] ?? null,
+            'email' => $settings['email'] ?? null,
+            'phone' => $settings['phone'] ?? null,
+            'whatsapp' => $settings['whatsapp'] ?? null,
+            'github_url' => $settings['github_url'] ?? null,
+            'linkedin_url' => $settings['linkedin_url'] ?? null,
+            'cv_path' => $settings['cv_path'] ?? null,
+            'stat_projects' => $settings['stat_projects'] ?? null,
+            'stat_clients' => $settings['stat_clients'] ?? null,
+            'stat_experience' => $settings['stat_experience'] ?? null,
+            'stat_technologies' => $settings['stat_technologies'] ?? null,
+            'calc_base_landing' => $settings['calc_base_landing'] ?? null,
+            'calc_base_business' => $settings['calc_base_business'] ?? null,
+            'calc_base_school' => $settings['calc_base_school'] ?? null,
+            'calc_base_ecommerce' => $settings['calc_base_ecommerce'] ?? null,
+            'calc_base_webapp' => $settings['calc_base_webapp'] ?? null,
+        ],
+        'projects' => $projects->map(fn($p) => [
+            'title' => $p->title,
+            'description' => \Illuminate\Support\Str::limit($p->description, 120),
+            'category' => $p->category->name ?? null,
+            'url' => $p->project_url,
+            'technologies' => $p->technologies_used,
+        ]),
+        'skills' => $skills->mapWithKeys(fn($group, $cat) => [
+            $cat => $group->map(fn($s) => ['name' => $s->name, 'proficiency' => $s->proficiency])
+        ]),
+    ]) }}</script>
+
+    {{-- AI Assistant --}}
+    <div id="ai-chat-toggle" class="ai-chat-toggle">
+        <i class="bi bi-robot"></i>
+        <span class="ai-chat-badge">Ask AI</span>
+    </div>
+    <div id="ai-chat-window" class="ai-chat-window">
+        <div class="ai-chat-header">
+            <div class="d-flex align-items-center gap-2">
+                <div class="ai-avatar"><i class="bi bi-robot"></i></div>
+                <div>
+                    <div class="ai-name">Portfolio Assistant</div>
+                    <div class="ai-status"><span class="ai-dot"></span>Online</div>
+                </div>
+            </div>
+            <button id="ai-chat-close" class="ai-chat-close"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div id="ai-chat-messages" class="ai-chat-messages"></div>
+        <div class="ai-quick-actions" id="ai-quick-actions"></div>
+        <div class="ai-chat-input">
+            <input type="text" id="ai-chat-input" placeholder="Ask me anything..." autocomplete="off">
+            <button id="ai-chat-send"><i class="bi bi-send-fill"></i></button>
         </div>
     </div>
 

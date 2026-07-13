@@ -179,6 +179,65 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // ---- Project Search ----
+    const searchInput = document.getElementById('project-search');
+    const techFilterBtns = document.querySelectorAll('.tech-filter-btn');
+    const noResults = document.getElementById('no-search-results');
+    let activeTech = 'all';
+
+    function applyFilters() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        let visibleCount = 0;
+
+        projectItems.forEach(item => {
+            const title = item.dataset.title || '';
+            const desc = item.dataset.desc || '';
+            const techs = item.dataset.techs || '';
+            const categoryMatch = !activeCategory || activeCategory === 'all' || item.dataset.category === activeCategory;
+            const techMatch = activeTech === 'all' || techs.includes(activeTech);
+            const searchMatch = !query || title.includes(query) || desc.includes(query);
+
+            if (categoryMatch && techMatch && searchMatch) {
+                item.style.display = '';
+                visibleCount++;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        if (noResults) {
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    }
+
+    let activeCategory = 'all';
+    // Update activeCategory when category filter changes
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            activeCategory = this.dataset.filter;
+            applyFilters();
+        });
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', applyFilters);
+    }
+
+    techFilterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const tech = this.dataset.tech;
+            if (activeTech === tech) {
+                activeTech = 'all';
+                this.classList.remove('active');
+            } else {
+                techFilterBtns.forEach(b => b.classList.remove('active'));
+                activeTech = tech;
+                this.classList.add('active');
+            }
+            applyFilters();
+        });
+    });
+
     // ---- Lightbox ----
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');

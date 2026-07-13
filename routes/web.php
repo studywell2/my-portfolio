@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\CaseStudyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\DashboardController;
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PortfolioController::class, 'index'])->name('home');
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
 Route::get('/download-cv', [PortfolioController::class, 'downloadCV'])->name('download.cv');
+Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-study.show');
+Route::get('/api/projects/search', [CaseStudyController::class, 'search']);
 
 // Admin auth (guest only)
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');

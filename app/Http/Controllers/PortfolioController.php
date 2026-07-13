@@ -15,7 +15,7 @@ class PortfolioController extends Controller
     {
         $settings = Setting::allSettings();
 
-        $projects = Project::orderBy('sort_order')->orderBy('created_at', 'desc')->get();
+        $projects = Project::with('category')->orderBy('sort_order')->orderBy('created_at', 'desc')->get();
         $categories = Category::orderBy('sort_order')->get();
         $skills = Skill::orderBy('sort_order')->get()->groupBy('category');
         $testimonials = Testimonial::active()->get();
