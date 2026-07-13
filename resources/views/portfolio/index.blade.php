@@ -13,7 +13,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $settings['site_name'] ?? 'Abideen.dev' }}">
     <meta name="twitter:description" content="{{ $settings['hero_subtitle'] ?? 'Full-Stack Developer & Project Manager' }}">
-    <title>{{ $settings['site_name'] ?? 'Abideen.dev' }} — {{ $settings['hero_subtitle'] ?? 'Full-Stack Developer' }}</title>
+    <title>{{ $settings['site_name'] ?? 'WETech.dev' }} — {{ $settings['hero_subtitle'] ?? 'Full-Stack Developer' }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">

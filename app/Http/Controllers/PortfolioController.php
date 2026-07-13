@@ -53,12 +53,13 @@ class PortfolioController extends Controller
 
     public function downloadCV()
     {
-        $cvPath = Setting::get('cv_path');
+        $settings = Setting::allSettings();
+        $cvPath = $settings['cv_path'] ?? null;
 
         if ($cvPath && file_exists(storage_path('app/public/' . $cvPath))) {
             return response()->download(storage_path('app/public/' . $cvPath));
         }
 
-        return back()->with('error', 'CV not available. Please upload it from the admin dashboard.');
+        abort(404, 'The CV file is not available.');
     }
 }

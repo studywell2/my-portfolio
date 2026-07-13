@@ -150,39 +150,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     skillBars.forEach(bar => skillObserver.observe(bar));
 
-    // ---- Project Filtering ----
+    // ---- Project Filtering & Search ----
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectItems = document.querySelectorAll('.project-item');
-
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            const filter = this.dataset.filter;
-
-            filterButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            projectItems.forEach(item => {
-                if (filter === 'all' || item.dataset.category === filter) {
-                    item.style.display = '';
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 50);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300);
-                }
-            });
-        });
-    });
-
-    // ---- Project Search ----
     const searchInput = document.getElementById('project-search');
     const techFilterBtns = document.querySelectorAll('.tech-filter-btn');
     const noResults = document.getElementById('no-search-results');
+    let activeCategory = 'all';
     let activeTech = 'all';
 
     function applyFilters() {
@@ -193,12 +167,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const title = item.dataset.title || '';
             const desc = item.dataset.desc || '';
             const techs = item.dataset.techs || '';
-            const categoryMatch = !activeCategory || activeCategory === 'all' || item.dataset.category === activeCategory;
+            const categoryMatch = activeCategory === 'all' || item.dataset.category === activeCategory;
             const techMatch = activeTech === 'all' || techs.includes(activeTech);
             const searchMatch = !query || title.includes(query) || desc.includes(query);
 
             if (categoryMatch && techMatch && searchMatch) {
                 item.style.display = '';
+                item.style.opacity = '1';
+                item.style.transform = 'scale(1)';
                 visibleCount++;
             } else {
                 item.style.display = 'none';
@@ -210,10 +186,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    let activeCategory = 'all';
-    // Update activeCategory when category filter changes
     filterButtons.forEach(btn => {
         btn.addEventListener('click', function () {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
             activeCategory = this.dataset.filter;
             applyFilters();
         });
