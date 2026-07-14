@@ -17,11 +17,14 @@ $dark-card-alt: #161616;
 }
 
 // ---- Body & Base ----
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
 body {
     font-family: $font-family-base;
     scroll-behavior: smooth;
-    overflow-x: hidden;
-    max-width: 100vw;
 }
 
 h1, h2, h3, h4, h5, h6 {

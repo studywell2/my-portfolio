@@ -52,12 +52,12 @@
     {{-- Navbar --}}
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="main-navbar">
         <div class="container">
-            <div class="d-flex align-items-center">
-                <a class="navbar-brand text-gradient-gold" href="#home">Abideen.dev</a>
-                <button class="navbar-toggler border-0 p-1 ms-2 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navOffcanvas" aria-label="Toggle navigation">
-                    <i class="bi bi-list text-light" style="font-size:1.4rem"></i>
-                </button>
-            </div>
+            <a class="navbar-brand text-gradient-gold" href="#home">Abideen.dev</a>
+
+            {{-- Mobile hamburger (right side) --}}
+            <button class="navbar-toggler border-0 p-1 d-lg-none ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#navOffcanvas" aria-label="Toggle navigation">
+                <i class="bi bi-list text-light" style="font-size:1.4rem"></i>
+            </button>
 
             {{-- Desktop nav (visible at lg and above) --}}
             <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
