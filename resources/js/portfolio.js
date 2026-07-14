@@ -443,6 +443,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const totalCostEl = document.getElementById('total-cost');
         const resetBtn = document.getElementById('calc-reset-btn');
         const getQuoteBtn = document.getElementById('get-quote-btn');
+        const rangeToggleBtn = document.getElementById('range-toggle-btn');
+        const rangeToggleText = document.getElementById('range-toggle-text');
+        const costRangeDisplay = document.getElementById('cost-range-display');
+        const costRangeText = document.getElementById('cost-range-text');
         const breakdownType = document.getElementById('breakdown-type');
         const breakdownTypeCost = document.getElementById('breakdown-type-cost');
         const breakdownPagesText = document.getElementById('breakdown-pages-text');
@@ -456,6 +460,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let currentType = projectTypeBtns[0].dataset.type;
         let currentBase = parseInt(projectTypeBtns[0].dataset.base) || 50000;
         let currentTypeName = projectTypeBtns[0].querySelector('span').textContent;
+        let lastTotal = 0;
 
         function formatNaira(amount) {
             return '\u20a6' + amount.toLocaleString('en-US');
@@ -472,7 +477,11 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             const total = currentBase + pagesCost + featuresCost;
+            lastTotal = total;
             totalCostEl.textContent = formatNaira(total);
+
+            var rangeHigh = Math.round(total * 1.8);
+            costRangeText.textContent = formatNaira(total) + ' \u2013 ' + formatNaira(rangeHigh);
 
             breakdownType.textContent = currentTypeName;
             breakdownTypeCost.textContent = formatNaira(currentBase);
@@ -529,6 +538,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
+        if (rangeToggleBtn) {
+            rangeToggleBtn.addEventListener('click', function () {
+                const isHidden = costRangeDisplay.style.display === 'none';
+                if (isHidden) {
+                    costRangeDisplay.style.display = 'block';
+                    rangeToggleText.textContent = 'Hide suggested range';
+                    rangeToggleBtn.classList.add('active');
+                } else {
+                    costRangeDisplay.style.display = 'none';
+                    rangeToggleText.textContent = 'View suggested range';
+                    rangeToggleBtn.classList.remove('active');
+                }
+            });
+        }
+
         getQuoteBtn.addEventListener('click', function () {
             const pages = parseInt(pageCountSlider.value);
             const selectedFeatures = [];
@@ -552,7 +576,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (selectedFeatures.length > 0) {
                     msg += '• Extra Features: ' + selectedFeatures.join(', ') + '\n';
                 }
-                msg += '• Estimated Budget: ' + totalCostEl.textContent + '\n\n';
+                msg += '• Starting Budget: ' + totalCostEl.textContent + '\n\n';
                 msg += 'Please get back to me with a detailed quote. Thank you!';
                 messageField.value = msg;
             }

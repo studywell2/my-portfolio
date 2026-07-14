@@ -665,13 +665,20 @@
                                     <hr style="border-color:#2a2a2a;margin:1rem 0">
 
                                     <div class="total-cost-label">
-                                        <i class="bi bi-calculator me-2"></i>Estimated Total
+                                        <i class="bi bi-calculator me-2"></i>Starting from
                                     </div>
                                     <div class="total-cost-amount text-gradient-gold" id="total-cost">&#8358;{{ number_format($calcSettings['base_landing']) }}</div>
 
+                                    <button type="button" class="range-toggle-btn" id="range-toggle-btn">
+                                        <i class="bi bi-arrows-expand-vertical me-1"></i><span id="range-toggle-text">View suggested range</span>
+                                    </button>
+                                    <div class="cost-range-display" id="cost-range-display" style="display:none">
+                                        <span class="cost-range-text" id="cost-range-text">₦0 – ₦0</span>
+                                    </div>
+
                                     <div class="cost-note">
                                         <i class="bi bi-info-circle me-1"></i>
-                                        This is an estimate. Final pricing depends on specific requirements. Let's discuss the details!
+                                        This is a starting price. Final cost depends on your specific requirements. Let's discuss the details!
                                     </div>
 
                                     <div class="d-flex gap-2 mt-3">
