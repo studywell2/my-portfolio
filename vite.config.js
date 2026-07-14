@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/js/portfolio.js',
+                'resources/js/playground.js',
             ],
             refresh: true,
         }),

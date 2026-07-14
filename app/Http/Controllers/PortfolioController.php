@@ -51,15 +51,32 @@ class PortfolioController extends Controller
         ));
     }
 
-    public function downloadCV()
+    public function playground()
+
     {
+
         $settings = Setting::allSettings();
+
+        return view('portfolio.playground', compact('settings'));
+
+    }
+
+
+    public function downloadCV()
+
+    {
+
+        $settings = Setting::allSettings();
+
         $cvPath = $settings['cv_path'] ?? null;
 
         if ($cvPath && file_exists(storage_path('app/public/' . $cvPath))) {
+
             return response()->download(storage_path('app/public/' . $cvPath));
+
         }
 
         abort(404, 'The CV file is not available.');
+
     }
 }

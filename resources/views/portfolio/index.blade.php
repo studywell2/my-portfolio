@@ -67,6 +67,7 @@
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('playground') }}">Playground</a></li>
                     <li class="nav-item"><a class="nav-link" href="#calculator">Cost Calculator</a></li>
                     <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -96,6 +97,7 @@
                 <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
                 <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('playground') }}">Playground</a></li>
                 <li class="nav-item"><a class="nav-link" href="#calculator">Cost Calculator</a></li>
                 <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>

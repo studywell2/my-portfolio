@@ -1,0 +1,572 @@
+// ============================================================================
+// Live Code Playground Styles
+// ============================================================================
+
+.playground-page {
+    padding-top: 100px;
+    padding-bottom: 3rem;
+    min-height: 100vh;
+}
+
+// ---- Hero Header ----
+.playground-hero {
+    text-align: center;
+    padding: 2rem 0 1.5rem;
+
+    .subtitle {
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: $gold;
+        background: rgba($gold, 0.08);
+        padding: 0.35rem 1rem;
+        border-radius: $radius-pill;
+        margin-bottom: 0.75rem;
+    }
+
+    h1 {
+        font-family: $font-family-heading;
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-weight: 800;
+        color: $dark-text;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        color: $dark-text-muted;
+        font-size: 1rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+// ---- Template Selector Bar ----
+.template-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+
+    .template-btn {
+        background: $dark-card;
+        border: 1px solid $dark-border;
+        color: $dark-text-muted;
+        border-radius: $radius-pill;
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: $transition-base;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        i {
+            font-size: 0.95rem;
+        }
+
+        &:hover {
+            border-color: $gold;
+            color: $gold;
+            background: rgba($gold, 0.06);
+            transform: translateY(-1px);
+        }
+
+        &.active {
+            border-color: $gold;
+            color: $gold;
+            background: rgba($gold, 0.1);
+        }
+    }
+}
+
+// ---- Toolbar ----
+.playground-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+
+    .tool-btn {
+        background: $dark-card;
+        border: 1px solid $dark-border;
+        color: $dark-text;
+        border-radius: $radius-sm;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: $transition-base;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        &:hover {
+            border-color: $gold;
+            color: $gold;
+            background: rgba($gold, 0.06);
+        }
+
+        &.btn-run {
+            background: $gold;
+            border-color: $gold;
+            color: $dark-bg;
+
+            &:hover {
+                background: $gold-light;
+                border-color: $gold-light;
+                color: $dark-bg;
+            }
+        }
+
+        &.btn-download {
+            i {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+// ---- Main Layout (Editor + Preview) ----
+.playground-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid $dark-border;
+    border-radius: $radius-md;
+    overflow: hidden;
+    background: $dark-bg-alt;
+    min-height: 500px;
+    position: relative;
+
+    &.resizing {
+        user-select: none;
+        cursor: col-resize;
+
+        iframe {
+            pointer-events: none;
+        }
+    }
+}
+
+// ---- Resizer Handle ----
+.playground-resizer {
+    width: 6px;
+    background: $dark-border;
+    cursor: col-resize;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+    z-index: 5;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 3px;
+        height: 40px;
+        background: $dark-text-muted;
+        border-radius: $radius-pill;
+        opacity: 0.4;
+        transition: opacity 0.2s ease;
+    }
+
+    &:hover {
+        background: rgba($gold, 0.3);
+
+        &::after {
+            opacity: 0.8;
+            background: $gold;
+        }
+    }
+}
+
+// ---- Editor Pane ----
+.editor-pane {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.editor-tabs {
+    display: flex;
+    background: $dark-bg;
+    border-bottom: 1px solid $dark-border;
+    flex-shrink: 0;
+
+    .editor-tab {
+        background: none;
+        border: none;
+        color: $dark-text-muted;
+        padding: 0.65rem 1.25rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: $transition-base;
+        border-bottom: 2px solid transparent;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        i {
+            font-size: 0.95rem;
+        }
+
+        &:hover {
+            color: $dark-text;
+        }
+
+        &.active {
+            color: $gold;
+            border-bottom-color: $gold;
+            background: rgba($gold, 0.04);
+        }
+    }
+}
+
+.editor-container {
+    flex: 1;
+    position: relative;
+    min-height: 400px;
+
+    .monaco-editor {
+        position: absolute;
+        inset: 0;
+    }
+
+    .editor-wrapper {
+        position: absolute;
+        inset: 0;
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+}
+
+// ---- Preview Pane ----
+.preview-pane {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+    background: $dark-bg;
+}
+
+.preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1rem;
+    background: $dark-bg;
+    border-bottom: 1px solid $dark-border;
+    flex-shrink: 0;
+
+    .preview-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: $dark-text-muted;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        i {
+            color: $gold;
+        }
+    }
+
+    .preview-actions {
+        display: flex;
+        gap: 0.35rem;
+
+        .preview-action-btn {
+            background: none;
+            border: 1px solid $dark-border;
+            color: $dark-text-muted;
+            border-radius: $radius-sm;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: $transition-fast;
+
+            &:hover {
+                color: $gold;
+                border-color: $gold;
+            }
+        }
+    }
+}
+
+.preview-wrapper {
+    flex: 1;
+    position: relative;
+    min-height: 400px;
+    background: #fff;
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+    }
+}
+
+// ---- Console Panel ----
+.console-panel {
+    background: darken($dark-bg, 3%);
+    border-top: 1px solid $dark-border;
+    max-height: 180px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease;
+    flex-shrink: 0;
+
+    &.collapsed {
+        max-height: 36px;
+        overflow: hidden;
+
+        .console-body {
+            display: none;
+        }
+
+        .console-chevron {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.console-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background: darken($dark-bg, 2%);
+    border-bottom: 1px solid $dark-border;
+    user-select: none;
+
+    .console-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: $dark-text-muted;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        i {
+            color: $blue;
+        }
+    }
+
+    .console-chevron {
+        color: $dark-text-muted;
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+    }
+
+    .console-clear-btn {
+        background: none;
+        border: none;
+        color: $dark-text-muted;
+        font-size: 0.75rem;
+        cursor: pointer;
+        padding: 0.15rem 0.5rem;
+        border-radius: $radius-sm;
+        transition: $transition-fast;
+
+        &:hover {
+            color: $gold;
+        }
+    }
+}
+
+.console-body {
+    padding: 0.5rem 1rem;
+    font-family: $font-family-code;
+    font-size: 0.8rem;
+    line-height: 1.6;
+
+    .console-line {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.2rem 0;
+
+        &.error {
+            color: #ff6b6b;
+        }
+
+        &.info {
+            color: $dark-text-muted;
+        }
+
+        &.success {
+            color: #51cf66;
+        }
+
+        .console-icon {
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .console-msg {
+            word-break: break-word;
+        }
+    }
+
+    .console-empty {
+        color: $dark-text-muted;
+        opacity: 0.6;
+        font-style: italic;
+    }
+}
+
+// ---- Responsive ----
+@media (max-width: 991.98px) {
+    .playground-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .playground-resizer {
+        display: none;
+    }
+
+    .editor-container {
+        min-height: 300px;
+    }
+
+    .preview-wrapper {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .playground-hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .template-bar {
+        .template-btn {
+            font-size: 0.78rem;
+            padding: 0.35rem 0.8rem;
+        }
+    }
+
+    .playground-toolbar {
+        justify-content: stretch;
+
+        .tool-btn {
+            flex: 1;
+            justify-content: center;
+            font-size: 0.8rem;
+            padding: 0.45rem 0.6rem;
+        }
+    }
+
+    .editor-tabs .editor-tab {
+        padding: 0.55rem 0.8rem;
+        font-size: 0.8rem;
+    }
+}
+
+// ---- Light Theme Overrides ----
+[data-bs-theme="light"] {
+    .playground-hero h1 {
+        color: $light-text;
+    }
+
+    .playground-hero p {
+        color: $light-text-muted;
+    }
+
+    .template-bar .template-btn {
+        background: $light-card;
+        border-color: $light-border;
+        color: $light-text-muted;
+    }
+
+    .playground-toolbar .tool-btn {
+        background: $light-card;
+        border-color: $light-border;
+        color: $light-text;
+    }
+
+    .playground-layout {
+        border-color: $light-border;
+        background: $light-bg-alt;
+    }
+
+    .playground-resizer {
+        background: $light-border;
+    }
+
+    .editor-tabs {
+        background: $light-bg;
+        border-bottom-color: $light-border;
+    }
+
+    .editor-tabs .editor-tab {
+        color: $light-text-muted;
+    }
+
+    .preview-pane {
+        background: $light-bg;
+    }
+
+    .preview-header {
+        background: $light-bg;
+        border-bottom-color: $light-border;
+
+        .preview-title {
+            color: $light-text-muted;
+        }
+
+        .preview-action-btn {
+            border-color: $light-border;
+            color: $light-text-muted;
+        }
+    }
+
+    .console-panel {
+        background: darken($light-bg, 2%);
+        border-top-color: $light-border;
+    }
+
+    .console-header {
+        background: darken($light-bg, 1%);
+        border-bottom-color: $light-border;
+
+        .console-label {
+            color: $light-text-muted;
+        }
+
+        .console-chevron {
+            color: $light-text-muted;
+        }
+    }
+
+    .console-body .console-line.info {
+        color: $light-text-muted;
+    }
+
+    .console-body .console-empty {
+        color: $light-text-muted;
+    }
+}

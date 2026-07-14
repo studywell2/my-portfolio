@@ -19,6 +19,7 @@ Route::post('/contact', [ContactController::class, 'store'])->middleware('thrott
 Route::get('/download-cv', [PortfolioController::class, 'downloadCV'])->name('download.cv');
 Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('case-study.show');
 Route::get('/api/projects/search', [CaseStudyController::class, 'search']);
+Route::get('/playground', [PortfolioController::class, 'playground'])->name('playground');
 
 // Admin auth (guest only)
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');

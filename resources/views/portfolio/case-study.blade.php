@@ -29,6 +29,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('playground') }}">Playground</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#calculator">Cost Calculator</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#contact">Contact</a></li>
                     <li class="nav-item">
@@ -55,6 +56,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('playground') }}">Playground</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#calculator">Cost Calculator</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#contact">Contact</a></li>
                 <li class="nav-item mt-2">
