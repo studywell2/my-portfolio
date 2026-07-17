@@ -12,6 +12,7 @@ use App\Http\Controllers\CaseStudyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\AdminLiveChatController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\LiveChatAgentReplyController;
 
@@ -32,10 +33,12 @@ Route::prefix('live-chat')->middleware('throttle:30,1')->group(function () {
     Route::post('/typing', [LiveChatController::class, 'typing']);
 });
 
-// Admin auth (guest only)
+// Admin live chat (auth required)
 Route::prefix('admin/live-chat')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', [AdminLiveChatController::class, 'index'])->name('admin.live-chat.index');
     Route::post('/reply', [LiveChatAgentReplyController::class, 'reply'])->name('admin.live-chat.reply');
 });
+
 
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1');

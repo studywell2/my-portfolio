@@ -251,6 +251,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.live-chat.*')) active @endif" href="{{ route('admin.live-chat.index') }}">
+                    <i class="bi bi-chat-dots"></i> Live Chat
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link @if(request()->routeIs('admin.messages.*')) active @endif" href="{{ route('admin.messages.index') }}">
                     <i class="bi bi-envelope"></i> Messages
                     @php $unread = \App\Models\ContactMessage::unread()->count(); @endphp
