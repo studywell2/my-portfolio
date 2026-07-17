@@ -1,17 +1,20 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LiveChatController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CaseStudyController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SkillController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\TestimonialController;
-use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ContactMessageController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LiveChatAgentReplyController;
+
 
 // Public routes
 Route::get('/', [PortfolioController::class, 'index'])->name('home');
@@ -21,7 +24,19 @@ Route::get('/case-studies/{slug}', [CaseStudyController::class, 'show'])->name('
 Route::get('/api/projects/search', [CaseStudyController::class, 'search']);
 Route::get('/playground', [PortfolioController::class, 'playground'])->name('playground');
 
+// Live Chat (public, no auth)
+Route::prefix('live-chat')->middleware('throttle:30,1')->group(function () {
+
+    Route::get('/fetch', [LiveChatController::class, 'fetch']);
+    Route::get('/status', [LiveChatController::class, 'status']);
+    Route::post('/typing', [LiveChatController::class, 'typing']);
+});
+
 // Admin auth (guest only)
+Route::prefix('admin/live-chat')->middleware(['auth', 'admin'])->group(function () {
+    Route::post('/reply', [LiveChatAgentReplyController::class, 'reply'])->name('admin.live-chat.reply');
+});
+
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->middleware('throttle:5,1');
 

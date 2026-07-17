@@ -316,5 +316,8 @@
         </div>
     </div>
 
+    {{-- Live Chat Widget --}}
+    @include('partials.live-chat')
+
 </body>
 </html>
